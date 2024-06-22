@@ -1,28 +1,31 @@
 // crcon.js
 class API {
-    constructor(baseURL) {
-      this.baseURL = baseURL;
+  constructor(baseURL, config = {}) {
+    this.baseURL = baseURL;
+    this.token = config.token || null;
+  }
+
+  async request(endpoint, method = 'GET', body = null) {
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+
+    if (this.token) {
+      headers['Authorization'] = `Bearer ${this.token}`;
     }
-  
-    async request(endpoint, method = 'GET', body = null) {
-      const headers = { 'Content-Type': 'application/json' };
-      const config = {
-        method,
-        headers,
-      };
-  
-      if (body) {
-        config.body = JSON.stringify(body);
-      }
-  
-      const response = await fetch(`${this.baseURL}/${endpoint}`, config);
-  
-      if (!response.ok) {
-        throw new Error(`Request failed with status ${response.status}`);
-      }
-  
-      return response.json();
+
+    const options = {
+      method,
+      headers,
+    };
+
+    if (body) {
+      options.body = JSON.stringify(body);
     }
+
+    const response = await fetch(`${this.baseURL}/${endpoint}`, options);
+    return response.json();
+  }
   
     async asyncUploadVips() {
       return this.request('async_upload_vips', 'POST');
