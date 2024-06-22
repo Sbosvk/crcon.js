@@ -7,6 +7,7 @@ This repository contains a JavaScript module for interacting with the Hell Let L
 - **Comprehensive API Coverage:** All endpoints of the CRCON API are included, allowing for full interaction with the Hell Let Loose server.
 - **Easy Integration:** Designed to be easily integrated into your JavaScript projects, making it simple to build web interfaces, bots, and other applications.
 - **Promise-Based:** Utilizes JavaScript promises for asynchronous operations, ensuring a smooth and efficient user experience.
+- **Token Authentication:** Supports bearer token authentication for secure API calls.
 
 ## Getting Started
 
@@ -26,7 +27,12 @@ First, import the API class and initialize it with your CRCON API base URL:
 
 ```js
 const API = require('./path-to-api-class'); // Adjust the path as necessary
-const api = new API('https://your-api-url.com');
+
+const config = {
+  token: 'your-api-token-here'
+};
+
+const api = new API('https://your-api-url.com', config);
 ```
 
 ## Example
