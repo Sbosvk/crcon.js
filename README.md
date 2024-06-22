@@ -9,6 +9,10 @@ This repository contains a JavaScript module for interacting with the Hell Let L
 - **Promise-Based:** Utilizes JavaScript promises for asynchronous operations, ensuring a smooth and efficient user experience.
 - **Token Authentication:** Supports bearer token authentication for secure API calls.
 
+## Important Notice
+
+This library is mostly untested and is written based on the information provided by the CRCON API `get_api_documentation` endpoint. Users are encouraged to test the library thoroughly in their own environments and report any issues they encounter.
+
 ## Getting Started
 
 ### Installation
@@ -55,6 +59,15 @@ api.getPlayers()
 # Contributing
 
 We welcome contributions to improve this module. If you find any issues or have suggestions for new features, please open an issue or submit a pull request.
+
+# Donations
+
+**If you find this library useful and would like to support its development, please consider donating to the addresses listed on my profile**:
+
+- **DigiByte**: [D7hrf5D21PV24ksEGRdYCZ6JqgsboSVKKC](dgb://D7hrf5D21PV24ksEGRdYCZ6JqgsboSVKKC)
+- **Bitcoin**: [1NxXfPuDAAQrWxgrv7fJYSBoSVKbs77tBT](btc://1NxXfPuDAAQrWxgrv7fJYSBoSVKbs77tBT)
+- **Litecoin**: [LWDMRGzCTr1EsXapgFSBosvkJ27op9P2DW](ltc://LWDMRGzCTr1EsXapgFSBosvkJ27op9P2DW)
+
 
 # License
 
