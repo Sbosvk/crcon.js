@@ -60,4 +60,4 @@ This module is a JavaScript port of the Hell Let Loose Community RCON tool (CRCO
 
 # Documentation
 
-Read our [API Documentation](https://github.com/Sbosvk/crcon.js/wiki/API-Documentation)
+Read the [API Documentation](https://github.com/Sbosvk/crcon.js/wiki/API-Documentation)
