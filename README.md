@@ -15,7 +15,7 @@ This library is mostly untested and is written based on the information provided
 
 ## Getting Started
 
-### Installation
+<!-- ### Installation
 
 To install the module, clone this repository and install the necessary dependencies:
 
@@ -23,7 +23,7 @@ To install the module, clone this repository and install the necessary dependenc
 git clone https://github.com/your-username/crcon-js-module.git
 cd crcon-js-module
 npm install
-```
+``` -->
 
 # Usage
 
