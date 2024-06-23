@@ -1,0 +1,28 @@
+{
+  "name": "crcon.js",
+  "version": "0.0.1",
+  "description": "JS interface for Hell Let Loose Community RCON tool.",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sbosvk/crcon.js.git"
+  },
+  "keywords": [
+    "HLL",
+    "CRCON",
+    "Hell",
+    "Let",
+    "loose",
+    "Community",
+    "RCON"
+  ],
+  "author": "Oliver Krilov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Sbosvk/crcon.js/issues"
+  },
+  "homepage": "https://github.com/Sbosvk/crcon.js#readme"
+}
