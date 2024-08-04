@@ -1,6 +1,6 @@
 {
   "name": "crcon.js",
-  "version": "0.0.2",
+  "version": "0.0.31",
   "description": "JS interface for Hell Let Loose Community RCON tool.",
   "main": "lib/index.js",
   "scripts": {
