@@ -8,6 +8,7 @@ This repository contains a JavaScript module for interacting with the Hell Let L
 - **Easy Integration:** Designed to be easily integrated into your JavaScript projects, making it simple to build web interfaces, bots, and other applications.
 - **Promise-Based:** Utilizes JavaScript promises for asynchronous operations, ensuring a smooth and efficient user experience.
 - **Token Authentication:** Supports bearer token authentication for secure API calls.
+- **CRCON v10 Compatibility:** Fully compatible with the latest CRCON v10 API, including all new and updated endpoints.
 
 ## Important Notice
 
@@ -15,7 +16,7 @@ This library is mostly untested and is written based on the information provided
 
 ## Getting Started
 
-<!-- ### Installation
+### Installation
 
 To install the module, clone this repository and install the necessary dependencies:
 
@@ -23,28 +24,34 @@ To install the module, clone this repository and install the necessary dependenc
 git clone https://github.com/your-username/crcon-js-module.git
 cd crcon-js-module
 npm install
-``` -->
+```
 
-# Usage
+Alternatively, you can add it to your NodeJS project using npm:
+
+```bash
+npm install --save crcon.js
+```
+
+### Usage
 
 First, import the API class and initialize it with your CRCON API base URL:
 
 ```js
-const API = require('./path-to-api-class'); // Adjust the path as necessary
+const API = require('crcon.js');
 
 const config = {
   token: 'your-api-token-here'
 };
 
-const api = new API('https://your-api-url.com', config);
+const api = new API('https://your-crcon-url.com/api/', config);
 ```
 
-## Example
+#### Example
 
 ```js
 // Assuming the API class has been properly imported and initialized
 
-const api = new API('https://your-api-url.com');
+const api = new API('https://your-crcon-url.com/api/');
 
 // Example: Get the list of all players
 api.getPlayers()
@@ -56,11 +63,22 @@ api.getPlayers()
   });
 ```
 
-# Contributing
+## CRCON v10 API Endpoints
+
+The module now includes full support for the following endpoints introduced in CRCON v10:
+
+- `describe_*_config` endpoints for retrieving various server configurations.
+- `set_*_config` endpoints for updating configurations.
+- New player management endpoints like `flag_player`, `unflag_player`, and `watch_player`.
+- Extended support for detailed player and game state information.
+
+For a complete list of supported endpoints and their usage, please refer to the [API Documentation](https://github.com/Sbosvk/crcon.js/wiki/API-Documentation).
+
+## Contributing
 
 We welcome contributions to improve this module. If you find any issues or have suggestions for new features, please open an issue or submit a pull request.
 
-# Donations
+## Donations
 
 **If you find this library useful and would like to support its development, please consider donating to the addresses listed on my profile**:
 
@@ -69,14 +87,14 @@ We welcome contributions to improve this module. If you find any issues or have 
 - **Litecoin**: [LWDMRGzCTr1EsXapgFSBosvkJ27op9P2DW](ltc://LWDMRGzCTr1EsXapgFSBosvkJ27op9P2DW)
 
 
-# License
+## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
 
-# Acknowledgements
+## Acknowledgements
 
 This module is a JavaScript port of the Hell Let Loose Community RCON tool (CRCON) API. Special thanks to the Hell Let Loose community for their continued support and development of CRCON.
 
-# Documentation
+## Documentation
 
 Read the [API Documentation](https://github.com/Sbosvk/crcon.js/wiki/API-Documentation)
