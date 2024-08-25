@@ -54,7 +54,7 @@ const api = new API('https://your-crcon-url.com/api/', config);
 const api = new API('https://your-crcon-url.com/api/');
 
 // Example: Get the list of all players
-api.getPlayers()
+api.get_players()
   .then(data => {
     console.log('List of players:', data);
   })
@@ -65,12 +65,16 @@ api.getPlayers()
 
 ## CRCON v10 API Endpoints
 
-The module now includes full support for the following endpoints introduced in CRCON v10:
+The module now includes full support for all CRCON v10 API endpoints. This includes, but is not limited to:
 
-- `describe_*_config` endpoints for retrieving various server configurations.
-- `set_*_config` endpoints for updating configurations.
-- New player management endpoints like `flag_player`, `unflag_player`, and `watch_player`.
-- Extended support for detailed player and game state information.
+- **Admin Management**: Endpoints for managing admins, roles, and pings.
+- **Audit Logs**: Comprehensive access to audit logs and historical data.
+- **Auto Moderation**: Configurations and settings related to auto moderation and broadcasts.
+- **Bans & Blacklists**: Full support for managing bans and blacklists.
+- **Player Management**: Extensive endpoints for player information, management, and actions.
+- **VIP Management**: Tools for managing VIPs, including adding, removing, and configuration handling.
+- **Server Settings**: Access and modify various server settings.
+- **Miscellaneous**: Includes various utility endpoints like cache clearing, game server reconnecting, and more.
 
 For a complete list of supported endpoints and their usage, please refer to the [API Documentation](https://github.com/Sbosvk/crcon.js/wiki/API-Documentation).
 
