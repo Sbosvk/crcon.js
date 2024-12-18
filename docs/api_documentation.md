@@ -41,6 +41,20 @@ Fetches the configuration for admin ping Discord webhooks.
 
 ---
 
+#### `get_online_mods`
+Fetches the list of online moderators.
+
+**Returns:** `Promise<any>`
+
+---
+
+#### `get_ingame_mods`
+Fetches the list of in-game moderators.
+
+**Returns:** `Promise<any>`
+
+---
+
 #### `add_admin`
 Adds a new admin.
 
@@ -58,6 +72,20 @@ Removes an admin by player ID.
 
 **Parameters:**
 - `player_id` (string, optional): The player ID of the admin to be removed.
+
+**Returns:** `Promise<any>`
+
+---
+
+#### `get_all_standard_message_config`
+Fetches all standard message configurations.
+
+**Returns:** `Promise<any>`
+
+---
+
+#### `get_all_discord_webhooks_config`
+Fetches all Discord webhooks configuration.
 
 **Returns:** `Promise<any>`
 
@@ -83,10 +111,22 @@ Validates configuration for admin ping Discord webhooks.
 
 ---
 
-### **Audit Logs**
+### **Logs**
 
 #### `get_audit_logs`
 Fetches the audit logs.
+
+**Returns:** `Promise<any>`
+
+---
+
+#### `get_structured_logs`
+Fetches structured logs with filters.
+
+**Parameters:**
+- `since_min_ago` (number, optional): Logs from the past X minutes.
+- `filter_action` (string, optional): Action to filter logs by.
+- `filter_player` (string, optional): Player to filter logs by.
 
 **Returns:** `Promise<any>`
 
@@ -191,6 +231,20 @@ Fetches the current status of auto balance.
 
 #### `get_autobalance_threshold`
 Fetches the auto balance threshold.
+
+**Returns:** `Promise<any>`
+
+---
+
+#### `get_idle_autokick_time`
+Fetches the idle autokick time.
+
+**Returns:** `Promise<any>`
+
+---
+
+#### `get_vac_game_bans_config`
+Fetches the configuration for VAC game bans.
 
 **Returns:** `Promise<any>`
 
@@ -505,6 +559,13 @@ Fetches the history of players based on filters.
 
 ---
 
+#### `get_temp_bans`
+Fetches the list of temporary bans.
+
+**Returns:** `Promise<any>`
+
+---
+
 #### `flag_player`
 Flags a player with a specific label.
 
@@ -693,10 +754,45 @@ Downloads VIP configurations from the server.
 
 ---
 
-### **Server Settings**
+### **Server Settings and Status**
 
 #### `get_server_settings`
 Fetches the server settings.
+
+**Returns:** `Promise<any>`
+
+---
+
+#### `get_connection_info`
+Fetches the connection information of the server.
+
+**Returns:** `Promise<any>`
+
+---
+
+#### `get_version`
+Fetches the current version of the server or API.
+
+**Returns:** `Promise<any>`
+
+---
+
+#### `get_status`
+Fetches the current status of the server.
+
+**Returns:** `Promise<any>`
+
+---
+
+#### `get_current_map_sequence`
+Fetches the current map sequence.
+
+**Returns:** `Promise<any>`
+
+---
+
+#### `get_camera_notification_config`
+Fetches the camera notification configuration.
 
 **Returns:** `Promise<any>`
 
@@ -765,15 +861,6 @@ Sets the vote kick auto toggle configuration.
 
 ---
 
-### **Miscellaneous**
-
-#### `get_connection_info`
-Fetches the connection information of the server.
-
-**Returns:** `Promise<any>`
-
----
-
 #### `clear_cache`
 Clears the server cache.
 
@@ -795,15 +882,57 @@ Executes a raw command on the server.
 
 ---
 
-#### `get_version`
-Fetches the current version of the server or API.
+### **Game Settings and Status**
+
+#### `get_gamestate`
+Fetches the current game state.
 
 **Returns:** `Promise<any>`
 
 ---
 
-#### `get_status`
-Fetches the current status of the server.
+#### `get_date_scoreboard`
+Fetches the scoreboard data for a specified date range.
+
+**Parameters:**
+
+- `start` (string, optional): The start date of the range.
+- `end` (string, optional): The end date of the range.
+
+**Returns:** `Promise<any>`
+
+---
+
+#### `get_live_game_stats`
+Fetches live game statistics.
+
+**Returns:** `Promise<any>`
+
+---
+
+#### `get_queue_length`
+Fetches the current queue length.
+
+**Returns:** `Promise<any>`
+
+---
+
+#### `get_round_time_remaining`
+Fetches the remaining time for the current round in seconds.
+
+**Returns:** `Promise<any>`
+
+---
+
+#### `get_team_objective_scores`
+Fetches team objective scores.
+
+**Returns:** `Promise<any>`
+
+---
+
+#### `get_team_view`
+Fetches the team view.
 
 **Returns:** `Promise<any>`
 
