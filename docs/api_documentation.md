@@ -765,26 +765,6 @@ Sets the vote kick auto toggle configuration.
 
 ---
 
-# API Module Documentation
-
-## Overview
-
-This module provides a wrapper around various API endpoints, facilitating interaction with the backend. Each method corresponds to an API endpoint and uses the fetch API to perform HTTP requests.
-
-This version is fully compatible with the CRCON v10 API, ensuring all current features and endpoints are supported.
-
-## Constructor
-
-### `constructor(baseURL, config = {})`
-
-#### **Parameters**
-
-- **`baseURL`** (string): The base URL of the API.
-- **`config`** (object, optional): Configuration options for the API instance.
-  - **`token`** (string, optional): A bearer token for authentication. If set, this token will be used for all API calls.
-
-## Methods
-
 ### **Miscellaneous**
 
 #### `get_connection_info`
