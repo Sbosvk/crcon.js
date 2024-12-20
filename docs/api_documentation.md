@@ -18,88 +18,157 @@ This version is fully compatible with the CRCON v10 API, ensuring all current fe
 
 ## Methods
 
-### **Admin Management**
+### Format:
+
+General return structure of all methods:
+
+**With debugging:**
+
+```json
+{
+    "result": object | Array<object> | string | number | boolean | null,
+    "command": string,
+    "arguments": object,
+    "failed": boolean,
+    "error": null | string,
+    "forward_results": null | object,
+    "version": string
+}
+```
+
+**Standard**
+```json
+{
+    object | Array<object> | string | number | boolean | null
+}
+```
+
+### Admin Management
 
 #### `add_admin`
-No description provided.
+Add a new admin to the game server(s).
 
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_id` (any) (default: None)
-- `role` (any) (default: None)
-- `description` (any) (default: None)
+- `player_id` (string) (default: None)
+- `role` (string) (default: None)
+- `description` (string, optional) (default: None)
 
 **Returns:** `boolean`
 
 ---
 
 #### `remove_admin`
-No description provided.
+Remove an admin from the game server.
 
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_id` (any) (default: None)
+- `player_id` (string) (default: None)
 
 **Returns:** `boolean`
 
 ---
 
 #### `get_admin_groups`
-No description provided.
+Get a list of game server admin groups.
 
 **Supports HTTP methods:** GET
 
 **No parameters required.**
 
-**Returns:** `list[str]`
+**Returns:** `Array<string>`
+
+**Return Example:**
+```json
+{
+    "result": [
+        "owner",
+        "senior",
+        "junior",
+        "spectator"
+    ]
+}
+```
 
 ---
 
 #### `get_admin_ids`
-No description provided.
+Returns a list of server admins (all roles).
 
 **Supports HTTP methods:** GET
 
 **No parameters required.**
 
-**Returns:** `list[rcon.types.AdminType]`
+**Returns:** `Array<object>`
+
+**Return Example:**
+
+```json
+{
+    "result": [
+        {
+            "player_id": "123123123123123",
+            "name": "John Doe",
+            "role": "Owner"
+        },
+        {
+            "player_id": "321321321321321",
+            "name": "Jane Doe",
+            "role": "Spectator"
+        }
+    ]
+}
+```
 
 ---
 
 #### `get_ingame_mods`
-No description provided.
+Get a list of ingame mods.
 
 **Supports HTTP methods:** GET
 
 **No parameters required.**
 
-**Returns:** `list[rcon.types.AdminUserType]`
+**Returns:** `Array<object>`
 
 ---
 
 #### `get_online_mods`
-No description provided.
+Get a list of online CRCON mods.
 
 **Supports HTTP methods:** GET
 
 **No parameters required.**
 
-**Returns:** `list[rcon.types.AdminUserType]`
+**Returns:** `Array<object>`
+
+**Return Example:**
+
+```json
+{
+    "result": [
+        {
+            "username": "JohnDoe",
+            "player_id": "123123123123123"
+        }
+    ]
+}
+```
 
 ---
 
-### **Logs**
+### Logs
 
 #### `describe_log_line_webhook_config`
-No description provided.
+Both native (from the game server) and synthetic (created by CRCON) log types.
 
 **Supports HTTP methods:** GET
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -110,7 +179,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -121,7 +190,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `Array<object>`
 
 ---
 
@@ -132,7 +201,9 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object` with the following properties:
+- `usernames`: `Array<string>`
+- `commands`: `Array<string>`
 
 ---
 
@@ -142,29 +213,36 @@ No description provided.
 **Supports HTTP methods:** GET, POST
 
 **Parameters:**
-- `player_name` (string (optional)) (default: None)
-- `player_id` (string (optional)) (default: None)
-- `action` (string (optional)) (default: None)
-- `limit` (integer) (default: 1000)
-- `from_` (any) (default: None)
-- `till` (any) (default: None)
-- `time_sort` (any) (default: desc)
-- `exact_player_match` (boolean) (default: False)
-- `exact_action` (boolean) (default: True)
-- `server_filter` (string (optional)) (default: None)
+- `player_name` (string, optional) (default: None)
+- `player_id` (string, optional) (default: None)
+- `action` (string, optional) (default: None)
+- `limit` (integer, optional) (default: 1000)
+- `from_` (any, optional) (default: None)
+- `till` (any, optional) (default: None)
+- `time_sort` (any, optional) (default: desc)
+- `exact_player_match` (boolean, optional) (default: False)
+- `exact_action` (boolean, optional) (default: True)
+- `server_filter` (string, optional) (default: None)
 
-**Returns:** `None`
+**Returns:** `Array<object>` with the following properties:
+- `id`: `<Integer>`
+- `version`: `<Integer>`
+- `creation_time`: `<string>`
+- `event_time`: `<string>`,
+- `type`: `<string>`,
+- `player1_name`: `<null | String>`,
+- `player1_id`: `<null | String>`,
+- `player2_name`: `<null | String>`,
+- `player2_id`: `<null | String>`,
+- `raw`: `<string>`,
+- `content`: `<string>`,
+- `server`: `<string>`,
+- `weapon`: `<null | String>`
 
 ---
 
 #### `get_historical_logs_csv`
-No description provided.
-
-**Supports HTTP methods:** GET, POST
-
-**No parameters required.**
-
-**Returns:** `None`
+Not supported by this interface.
 
 ---
 
@@ -175,7 +253,8 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `<class 'rcon.user_config.log_line_webhooks.LogLineWebhookUserConfig'>`
+**Returns:** `object` with the following properties:
+- `webhooks`: `Array<object>`
 
 ---
 
@@ -186,7 +265,21 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
+
+**Return Example:**
+
+```json
+    {
+        "result": {
+            "enabled": boolean,
+            "stream_size": integer,
+            "startyp_since_mins": integer,
+            "refresh_frequency_sec": integer,
+            "refresh_since_mins": integer
+        }
+    }
+```
 
 ---
 
@@ -198,9 +291,9 @@ You most likely want to use a different method/endpoint to get parsed logs.
 **Supports HTTP methods:** GET
 
 **Parameters:**
-- `since_min_ago` (any) (default: None)
-- `filter_` (string) (default: )
-- `by` (string) (default: )
+- `since_min_ago` (string) (default: None): A numeric value in string format representing the number of minutes ago to fetch logs.
+- `filter_` (string, optional) (default: )
+- `by` (string, optional) (default: )
 
 **Returns:** `string`
 
@@ -212,15 +305,15 @@ No description provided.
 **Supports HTTP methods:** GET, POST
 
 **Parameters:**
-- `filter_player` (any) (default: [])
-- `filter_action` (any) (default: [])
-- `inclusive_filter` (boolean) (default: True)
-- `start` (integer) (default: 0)
-- `end` (integer) (default: 10000)
-- `exact_player_match` (boolean) (default: True)
-- `exact_action` (boolean) (default: False)
+- `filter_player` (string, optional) (default: [])
+- `filter_action` (string, optional) (default: [])
+- `inclusive_filter` (boolean, optional) (default: True)
+- `start` (integer, optional) (default: 0)
+- `end` (integer, optional) (default: 10000)
+- `exact_player_match` (boolean, optional) (default: True)
+- `exact_action` (boolean, optional) (default: False)
 
-**Returns:** `<class 'rcon.types.ParsedLogsType'>`
+**Returns:** `object`
 
 ---
 
@@ -230,11 +323,11 @@ No description provided.
 **Supports HTTP methods:** GET
 
 **Parameters:**
-- `since_min_ago` (integer) (default: None)
-- `filter_action` (string (optional)) (default: None)
-- `filter_player` (string (optional)) (default: None)
+- `since_min_ago` (string | integer) (default: None): Expects a numeric value.
+- `filter_action` (string, optional) (default: None)
+- `filter_player` (string, optional) (default: None)
 
-**Returns:** `<class 'rcon.types.ParsedLogsType'>`
+**Returns:** `object`
 
 ---
 
@@ -247,7 +340,7 @@ No description provided.
 - `by` (string) (default: None)
 - `config` (any) (default: None)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any, optional) (default: None)
 
 **Returns:** `boolean`
 
@@ -261,8 +354,8 @@ No description provided.
 **Parameters:**
 - `by` (string) (default: None)
 - `config` (any) (default: None)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: None)
 
 **Returns:** `boolean`
 
@@ -276,7 +369,7 @@ No description provided.
 **Parameters:**
 - `by` (string) (default: None)
 - `config` (any) (default: None)
-- `reset_to_default` (boolean) (default: False)
+- `reset_to_default` (boolean, optional) (default: False)
 - `kwargs` (any) (default: None)
 
 **Returns:** `boolean`
@@ -291,8 +384,8 @@ No description provided.
 **Parameters:**
 - `by` (string) (default: None)
 - `config` (any) (default: None)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: None)
 
 **Returns:** `boolean`
 
@@ -608,6 +701,14 @@ No description provided.
 
 ### **Kicks, Bans & Blacklists**
 
+**Bans**:
+Bans are records stored on server config.
+
+**Blacklists**:
+Blacklists are collections of ban-like records stored by CRCON
+to provide greater flexibility and scalability.
+Recommend to use blacklists over bans when possible as they are more flexible and versatile.
+
 #### `describe_name_kick_config`
 No description provided.
 
@@ -615,7 +716,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -626,7 +727,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -659,7 +760,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `<class 'rcon.user_config.name_kicks.NameKickUserConfig'>`
+**Returns:** `object`
 
 ---
 
@@ -670,7 +771,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `<class 'rcon.user_config.auto_kick.AutoVoteKickUserConfig'>`
+**Returns:** `object`
 
 ---
 
@@ -692,20 +793,20 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `list[tuple[int, int]]`
+**Returns:** `array`
 
 ---
 
 #### `kick`
-No description provided.
+Kick selected player.
 
 **Supports HTTP methods:** POST
 
 **Parameters:**
 - `player_name` (any) (default: None)
 - `reason` (any) (default: None)
-- `by` (any) (default: None)
-- `player_id` (string (optional)) (default: None)
+- `by` (string, optional) (default: None)
+- `player_id` (string, optional) (default: None)
 
 **Returns:** `boolean`
 
@@ -728,7 +829,7 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `minutes` (any) (default: None)
+- `minutes` (integer | string) (default: None): Expects numeric value.
 
 **Returns:** `boolean`
 
@@ -740,7 +841,7 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `max_ms` (any) (default: None)
+- `max_ms` (integer | string) (default: None): Expects numeric value.
 
 **Returns:** `boolean`
 
@@ -754,8 +855,8 @@ No description provided.
 **Parameters:**
 - `by` (string) (default: None)
 - `config` (any) (default: None)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: None)
 
 **Returns:** `boolean`
 
@@ -769,8 +870,8 @@ No description provided.
 **Parameters:**
 - `by` (string) (default: None)
 - `config` (any) (default: None)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: None)
 
 **Returns:** `boolean`
 
@@ -796,7 +897,7 @@ No description provided.
 **Parameters:**
 - `threshold_pairs` (any) (default: None)
 
-**Returns:** `str | bool`
+**Returns:** `string | boolean`
 
 ---
 
@@ -808,8 +909,8 @@ No description provided.
 **Parameters:**
 - `by` (string) (default: None)
 - `config` (any) (default: None)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: None)
 
 **Returns:** `boolean`
 
@@ -823,8 +924,8 @@ No description provided.
 **Parameters:**
 - `by` (string) (default: None)
 - `config` (any) (default: None)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: None)
 
 **Returns:** `boolean`
 
@@ -837,7 +938,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -848,7 +949,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -860,9 +961,9 @@ get all bans from player_id
 **Supports HTTP methods:** GET
 
 **Parameters:**
-- `player_id` (string) (default: None)
+- `player_id` (string | integer) (default: None): Expects numeric value.
 
-**Returns:** `list[rcon.types.GameServerBanType]`
+**Returns:** `Array<object>`
 
 ---
 
@@ -873,7 +974,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `list[rcon.types.GameServerBanType]`
+**Returns:** `Array<object>`
 
 ---
 
@@ -884,7 +985,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `list[rcon.types.GameServerBanType]`
+**Returns:** `Array<object>`
 
 ---
 
@@ -895,7 +996,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `list[rcon.types.GameServerBanType]`
+**Returns:** `Array<object>`
 
 ---
 
@@ -906,7 +1007,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `<class 'rcon.user_config.ban_tk_on_connect.BanTeamKillOnConnectUserConfig'>`
+**Returns:** `object`
 
 ---
 
@@ -917,20 +1018,20 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `<class 'rcon.user_config.vac_game_bans.VacGameBansUserConfig'>`
+**Returns:** `object`
 
 ---
 
 #### `perma_ban`
-No description provided.
+Permanently ban a player by player name or player ID.
 
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_name` (any) (default: None)
-- `player_id` (any) (default: None)
-- `reason` (any) (default: )
-- `by` (any) (default: )
+- `player_name` (any, optional) (default: None)
+- `player_id` (any, optional) (default: None)
+- `reason` (any, optional) (default: "")
+- `by` (any, optional) (default: "")
 
 **Returns:** `boolean`
 
@@ -949,7 +1050,7 @@ Remove a perma ban by ban log. Note that a player ID is a valid ban log.
 ---
 
 #### `remove_temp_ban`
-Remove a temp ban by player ID or game server ban log
+Remove a temp ban by player ID or game server ban log.
 
 **Supports HTTP methods:** POST
 
@@ -968,8 +1069,8 @@ No description provided.
 **Parameters:**
 - `by` (string) (default: None)
 - `config` (any) (default: None)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: None)
 
 **Returns:** `boolean`
 
@@ -983,8 +1084,8 @@ No description provided.
 **Parameters:**
 - `by` (string) (default: None)
 - `config` (any) (default: None)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: None)
 
 **Returns:** `boolean`
 
@@ -996,11 +1097,11 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_name` (string (optional)) (default: None)
-- `player_id` (string (optional)) (default: None)
-- `duration_hours` (integer) (default: 2)
-- `reason` (string) (default: )
-- `by` (string) (default: )
+- `player_name` (string, optional) (default: None)
+- `player_id` (string, optional) (default: None)
+- `duration_hours` (integer, optional) (default: 2)
+- `reason` (string, optional) (default: )
+- `by` (string, optional) (default: )
 
 **Returns:** `boolean`
 
@@ -1012,13 +1113,10 @@ Remove all temporary and permanent bans from the player_id.
 This does not remove any blacklists, meaning the player may be immediately banned
 again. To remove any bans or blacklists, use `unblacklist_player` instead.
 
-Args:
-    player_id: steam_id_64 or windows store ID
-
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_id` (string) (default: None)
+- `player_id` (string) (default: None): steam_id_64 or windows store ID
 
 **Returns:** `boolean`
 
@@ -1030,10 +1128,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `by` (string) (default: <API Key User>)
+- `config` (object) (default: None)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: None)
 
 **Returns:** `boolean`
 
@@ -1045,10 +1143,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `by` (string) (default: <API Key User>)
+- `config` (object) (default: None)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: None)
 
 **Returns:** `boolean`
 
@@ -1057,82 +1155,47 @@ No description provided.
 #### `add_blacklist_record`
 Adds a new record to a blacklist.
 
-Blacklists are collections of ban-like records stored by CRCON
-to provide greater flexibility and scalability.
-
-Args:
-    player_id: steam_id_64 or windows store ID to blacklist
-    blacklist_id: The ID of the blacklist to use
-    reason: The reason the player was blacklisted for
-    expires_at: When the blacklist should expire, if ever
-    admin_name: The person/tool that is blacklisting the player
-
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_id` (string) (default: None)
-- `blacklist_id` (integer) (default: None)
-- `reason` (string) (default: None)
-- `expires_at` (any) (default: None)
-- `admin_name` (string) (default: )
+- `player_id` (string) (default: None): steam_id_64 or windows store ID to blacklist.
+- `blacklist_id` (integer) (default: None): The ID of the blacklist to use.
+- `reason` (string) (default: None): The reason the player was blacklisted for.
+- `expires_at` (any, optional) (default: None): When the blacklist should expire, if ever.
+- `admin_name` (string, optional) (default: <API Key User>): The person/tool that is blacklisting the player.
 
-**Returns:** `<class 'rcon.types.BlacklistType'>`
+**Returns:** `object` of record details.
 
 ---
 
 #### `create_blacklist`
 Creates a new, empty blacklist.
 
-Blacklists are collections of ban-like records stored by CRCON
-to provide greater flexibility and scalability.
-
-Args:
-    name:
-        Name for the list
-    sync:
-        Method to use for synchronizing an active record with the
-        game server. See `BlacklistSyncMethod` for more details.
-    servers:
-        A sequence of server numbers which this blacklist will
-        apply to. `None` means all servers.
-
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `name` (string) (default: None)
-- `sync` (any) (default: BlacklistSyncMethod.KICK_ONLY)
-- `servers` (any) (default: None)
+- `name` (string) (default: None): Name for the list
+- `sync` (string, optional) (default: "KICK_ONLY"): Method to use for synchronizing an active record with the game server.
+- `servers` (Array<integer | string>, optional) (default: None): A sequence of server numbers which this blacklist will apply to. `None` means all servers.
 
-**Returns:** `None`
+**Returns:** `object` of blacklist details.
 
 ---
 
 #### `delete_blacklist`
 Removes a blacklist alongside all of its records.
 
-Blacklists are collections of ban-like records stored by CRCON
-to provide greater flexibility and scalability.
-
-Args:
-    blacklist_id: The ID of the blacklist
-
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `blacklist_id` (integer) (default: None)
+- `blacklist_id` (integer) (default: None): The ID of the blacklist to delete.
 
-**Returns:** `None`
+**Returns:** `boolean`
 
 ---
 
 #### `delete_blacklist_record`
 Removes a blacklist record.
-
-Blacklists are collections of ban-like records stored by CRCON
-to provide greater flexibility and scalability.
-
-Args:
-    record_id: The ID of the record
 
 **Supports HTTP methods:** POST
 
@@ -1146,22 +1209,13 @@ Args:
 #### `edit_blacklist`
 Edits a blacklist.
 
-Blacklists are collections of ban-like records stored by CRCON
-to provide greater flexibility and scalability.
-
-Args:
-    blacklist_id: The ID of the blacklist
-    name: What to name the blacklist
-    sync: Method to use for synchronizing records with the game
-    servers: List of server numbers this blacklist applies to. `None` means all.
-
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `blacklist_id` (integer) (default: None)
-- `name` (string) (default: MISSING)
-- `sync_method` (any) (default: MISSING)
-- `servers` (any) (default: MISSING)
+- `blacklist_id` (integer) (default: None): The ID of the blacklist to edit.
+- `name` (string) (default: MISSING): The name of the blacklist.
+- `sync_method` (any) (default: MISSING): The method to use for synchronizing records with the game server.
+- `servers` (any) (default: None): A sequence of server numbers which this blacklist will apply to. `None` means all servers.
 
 **Returns:** `None`
 
@@ -1170,25 +1224,16 @@ Args:
 #### `edit_blacklist_record`
 Edits a blacklist record.
 
-Blacklists are collections of ban-like records stored by CRCON
-to provide greater flexibility and scalability.
-
 The blacklisted player ID cannot be edited. You instead need to
 delete this record and create a new one.
-
-Args:
-    record_id: The ID of the record
-    blacklist_id: The ID of the blacklist this record should be part of
-    reason: The reason the player was blacklisted for
-    expires_at: When the blacklist should expire, if ever
 
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `record_id` (integer) (default: None)
-- `blacklist_id` (integer) (default: MISSING)
-- `reason` (string) (default: MISSING)
-- `expires_at` (any) (default: MISSING)
+- `record_id` (integer) (default: None): The ID of the record to edit.
+- `blacklist_id` (integer, optional) (default: MISSING): The ID of the blacklist this record should be part of.
+- `reason` (string, optional) (default: MISSING): The reason the player was blacklisted for.
+- `expires_at` (any, optional) (default: MISSING): When the blacklist should expire, if ever.
 
 **Returns:** `boolean`
 
@@ -1197,23 +1242,38 @@ Args:
 #### `get_blacklist`
 Get a blacklist and its respective records.
 
-Blacklists are collections of ban-like records stored by CRCON
-to provide greater flexibility and scalability.
-
-Args:
-    blacklist_id: The ID of the blacklist
-
 **Supports HTTP methods:** GET
 
 **Parameters:**
-- `blacklist_id` (integer) (default: None)
+- `blacklist_id` (integer) (default: None): The ID of the blacklist to get.
 
-**Returns:** `<class 'rcon.types.BlacklistWithRecordsType'>`
+**Returns:** `object`
+
+**Return Example:**
+```json
+{
+    id: 0,
+    name: 'Default',
+    sync: 'kick_only',
+    servers: null
+    records: [
+        {
+        id: 1,
+        player_id: '123123123123123',
+        reason: 'Toxic language',
+        admin_name: 'Cool Guy',
+        created_at: '2024-08-23T16:10:17.260715+00:00',
+        expires_at: null,
+        is_active: true
+        }
+    ]
+}
+```
 
 ---
 
 #### `get_blacklist_records`
-No description provided.
+Get all blacklist records.
 
 **Supports HTTP methods:** GET
 
@@ -1225,34 +1285,29 @@ No description provided.
 - `page_size` (integer) (default: 50)
 - `page` (integer) (default: 1)
 
-**Returns:** `None`
+**Returns:** `object` with the following properties:
+- `records`: array<object>
 
 ---
 
 #### `get_blacklists`
 Get all blacklists.
 
-Blacklists are collections of ban-like records stored by CRCON
-to provide greater flexibility and scalability.
-
 **Supports HTTP methods:** GET
 
 **No parameters required.**
 
-**Returns:** `list[rcon.types.BlacklistType]`
+**Returns:** `Array<object>`
 
 ---
 
 #### `unblacklist_player`
 Expires all blacklists of a player and unbans them from all servers.
 
-Args:
-    player_id: steam_id_64 or windows store ID
-
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_id` (string) (default: None)
+- `player_id` (string) (default: None): steam_id_64 or windows store ID
 
 **Returns:** `boolean`
 
@@ -1260,28 +1315,23 @@ Args:
 
 ### **Player Management**
 
-#### `flag_player`
-Adds a new flag to the specified player_id
-
+**Flags:**
 Flags are used to label users and some tools use the flags to whitelist
 users. They are traditionally an emoji (the frontend uses an emoji picker)
 but there is no length restriction in the database.
 
-Args:
-    player_id: steam_id_64 or windows store ID
-    player_name: The players name which will be added as an alias
-    flag:
-    comment:
+#### `flag_player`
+Adds a new flag to the specified player_id
 
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_id` (string) (default: None)
-- `flag` (string) (default: None)
-- `player_name` (string (optional)) (default: None)
-- `comment` (string (optional)) (default: None)
+- `player_id` (string) (default: None): steam_id_64 or windows store ID.
+- `flag` (string) (default: None): The flag to add.
+- `player_name` (string, optional) (default: None): The players name which will be added as an alias.
+- `comment` (string, optional) (default: None)
 
-**Returns:** `<class 'rcon.types.PlayerFlagType'>`
+**Returns:** `object` with flag parameters.
 
 ---
 
@@ -1294,7 +1344,7 @@ No description provided.
 - `player_name` (string) (default: None)
 - `player` (any) (default: None)
 
-**Returns:** `<class 'rcon.types.GetDetailedPlayer'>`
+**Returns:** `object`
 
 ---
 
@@ -1305,7 +1355,9 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `<class 'rcon.types.GetDetailedPlayers'>`
+**Returns:** `object` with the following properties:
+- `players`: `object`
+- `fail_count`: `integer`
 
 ---
 
@@ -1317,7 +1369,7 @@ No description provided.
 **Parameters:**
 - `player_id` (string) (default: None)
 
-**Returns:** `list[rcon.types.PlayerCommentType]`
+**Returns:** `Array<object>`
 
 ---
 
@@ -1328,9 +1380,9 @@ No description provided.
 
 **Parameters:**
 - `player_name` (string) (default: None)
-- `can_fail` (any) (default: False)
+- `can_fail` (any, optional) (default: False)
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -1342,7 +1394,7 @@ No description provided.
 **Parameters:**
 - `player_id` (string) (default: None)
 
-**Returns:** `None`
+**Returns:** `Array<object>`
 
 ---
 
@@ -1353,9 +1405,27 @@ No description provided.
 
 **Parameters:**
 - `player_id` (string) (default: None)
-- `num_sessions` (integer) (default: 10)
+- `num_sessions` (integer, optional) (default: 10)
 
-**Returns:** `rcon.types.PlayerProfileTypeEnriched | None`
+**Returns:** `object` with the following properties:
+- `id`: `integer`,
+- `player_id`: `string`,
+- `created`: `string`,
+- `names`: `array`,
+- `sessions`: `array`,
+- `sessions_count`: `integer`,
+- `total_playtime_seconds`: `integer`,
+- `current_playtime_seconds`: `integer`,
+- `received_actions`: `array`,
+- `penalty_count`: `object`,
+- `blacklists`: `array`,
+- `is_blacklisted`: `boolean`,
+- `flags`: `array`,
+- `watchlist`: `null | array`,
+- `steaminfo`: `object`,
+- `vips`: `array`,
+- `bans`: `array`,
+- `comments`: `array`
 
 ---
 
@@ -1365,9 +1435,9 @@ No description provided.
 **Supports HTTP methods:** GET
 
 **Parameters:**
-- `as_dict` (any) (default: False)
+- `as_dict` (boolean, optional) (default: False)
 
-**Returns:** `dict[str, str] | list[tuple[str, str]]`
+**Returns:** `{ [key: string]: string } | Array<[string, string]>`
 
 ---
 
@@ -1378,7 +1448,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `list[rcon.types.GetPlayersType]`
+**Returns:** `Array<object>`
 
 ---
 
@@ -1388,20 +1458,24 @@ No description provided.
 **Supports HTTP methods:** GET, POST
 
 **Parameters:**
-- `page` (integer) (default: 1)
-- `page_size` (integer) (default: 500)
-- `last_seen_from` (any) (default: None)
-- `last_seen_till` (any) (default: None)
-- `player_id` (string (optional)) (default: None)
-- `player_name` (string (optional)) (default: None)
-- `blacklisted` (boolean (optional)) (default: None)
-- `is_watched` (boolean (optional)) (default: None)
-- `exact_name_match` (boolean) (default: False)
-- `ignore_accent` (boolean) (default: True)
-- `flags` (any) (default: None)
-- `country` (string (optional)) (default: None)
+- `page` (integer, optional) (default: 1)
+- `page_size` (integer, optional) (default: 500)
+- `last_seen_from` (string, optional) (default: None)
+- `last_seen_till` (string, optional) (default: None)
+- `player_id` (string, optional) (default: None)
+- `player_name` (string, optional) (default: None)
+- `blacklisted` (boolean, optional) (default: None)
+- `is_watched` (boolean, optional) (default: None)
+- `exact_name_match` (boolean, optional) (default: False)
+- `ignore_accent` (boolean, optional) (default: True)
+- `flags` (string | Array<string>, optional) (default: None)
+- `country` (string, optional) (default: None)
 
-**Returns:** `None`
+**Returns:** `object` with the following properties:
+- `total`: `integer`,
+- `players`: `Array<object>`,
+- `page`: `integer`,
+- `page_size`: `integer`
 
 ---
 
@@ -1413,7 +1487,7 @@ No description provided.
 **Parameters:**
 - `player_id` (string) (default: None)
 - `comment` (string) (default: None)
-- `by` (string) (default: None)
+- `by` (string, optional) (default: <API Key User>)
 
 **Returns:** `None`
 
@@ -1427,7 +1501,7 @@ No description provided.
 **Parameters:**
 - `player_name` (string) (default: None)
 - `reason` (string) (default: None)
-- `by` (string) (default: None)
+- `by` (string, optional) (default: <API Key User>)
 
 **Returns:** `boolean`
 
@@ -1452,7 +1526,7 @@ No description provided.
 
 **Parameters:**
 - `player_name` (any) (default: None)
-- `by` (any) (default: None)
+- `by` (any, optional) (default: <API Key User>)
 
 **Returns:** `boolean`
 
@@ -1461,19 +1535,14 @@ No description provided.
 #### `unflag_player`
 Flags can be removed either by flag_id (database key) or by passing a player ID and flag
 
-Args:
-    flag_id: The database primary key of the flag record to delete
-    player_id: steam_id_64 or windows store ID
-    flag: The flag to remove from `player_id` if present
-
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `flag_id` (integer (optional)) (default: None)
-- `player_id` (string (optional)) (default: None)
-- `flag` (string (optional)) (default: None)
+- `flag_id` (integer, optional) (default: None): The database primary key of the flag record to delete.
+- `player_id` (string, optional) (default: None): steam_id_64 or windows store ID.
+- `flag` (string, optional) (default: None): The flag to remove from player if present
 
-**Returns:** `<class 'rcon.types.PlayerFlagType'>`
+**Returns:** `object` with flag parameters.
 
 ---
 
@@ -1483,7 +1552,7 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_id` (string) (default: None)
+- `player_id` (integer | string) (default: None)
 
 **Returns:** `boolean`
 
@@ -1498,7 +1567,7 @@ No description provided.
 - `player_id` (string) (default: None)
 - `reason` (string) (default: None)
 - `by` (string) (default: None)
-- `player_name` (string (optional)) (default: None)
+- `player_name` (string, optional) (default: None)
 
 **Returns:** `boolean`
 
@@ -1589,8 +1658,8 @@ Add a new message template and return the ID of the new record
 
 **Parameters:**
 - `id` (integer) (default: None)
-- `title` (string (optional)) (default: None)
-- `content` (string (optional)) (default: None)
+- `title` (string, optional) (default: None)
+- `content` (string, optional) (default: None)
 - `category` (any) (default: None)
 - `by` (string) (default: None)
 
@@ -1837,7 +1906,7 @@ Adds VIP status on the game server and adds or updates their PlayerVIP record.
 **Parameters:**
 - `player_id` (string) (default: None)
 - `description` (string) (default: None)
-- `expiration` (string (optional)) (default: None)
+- `expiration` (string, optional) (default: None)
 
 **Returns:** `string`
 
@@ -2109,8 +2178,8 @@ No description provided.
 
 **Parameters:**
 - `map_name` (string) (default: None)
-- `after_map_name` (string (optional)) (default: None)
-- `after_map_name_number` (integer (optional)) (default: None)
+- `after_map_name` (string, optional) (default: None)
+- `after_map_name_number` (integer, optional) (default: None)
 
 **Returns:** `string`
 
@@ -2212,7 +2281,8 @@ No description provided.
 
 **Supports HTTP methods:** GET
 
-**No parameters required.**
+**Parameters**
+- `map_id` (integer) (default: None)
 
 **Returns:** `None`
 
@@ -2302,7 +2372,7 @@ No description provided.
 
 **Parameters:**
 - `map_name` (string) (default: None)
-- `map_number` (integer (optional)) (default: None)
+- `map_number` (integer, optional) (default: None)
 
 **Returns:** `None`
 
@@ -3510,7 +3580,8 @@ No description provided.
 
 **Supports HTTP methods:** GET
 
-**No parameters required.**
+**Parameters:**
+- `page` (integer) (default: 1)
 
 **Returns:** `None`
 
