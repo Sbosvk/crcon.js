@@ -51,9 +51,9 @@ Add a new admin to the game server(s).
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_id` (string) (default: None)
-- `role` (string) (default: None)
-- `description` (string, optional) (default: None)
+- `player_id` (string) (default: null)
+- `role` (string) (default: null)
+- `description` (string, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -65,7 +65,7 @@ Remove an admin from the game server.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_id` (string) (default: None)
+- `player_id` (string) (default: null)
 
 **Returns:** `boolean`
 
@@ -213,16 +213,16 @@ No description provided.
 **Supports HTTP methods:** GET, POST
 
 **Parameters:**
-- `player_name` (string, optional) (default: None)
-- `player_id` (string, optional) (default: None)
-- `action` (string, optional) (default: None)
+- `player_name` (string, optional) (default: null)
+- `player_id` (string, optional) (default: null)
+- `action` (string, optional) (default: null)
 - `limit` (integer, optional) (default: 1000)
-- `from_` (any, optional) (default: None)
-- `till` (any, optional) (default: None)
+- `from_` (any, optional) (default: null)
+- `till` (any, optional) (default: null)
 - `time_sort` (any, optional) (default: desc)
 - `exact_player_match` (boolean, optional) (default: False)
 - `exact_action` (boolean, optional) (default: True)
-- `server_filter` (string, optional) (default: None)
+- `server_filter` (string, optional) (default: null)
 
 **Returns:** `Array<object>` with the following properties:
 - `id`: `<Integer>`
@@ -291,9 +291,9 @@ You most likely want to use a different method/endpoint to get parsed logs.
 **Supports HTTP methods:** GET
 
 **Parameters:**
-- `since_min_ago` (string) (default: None): A numeric value in string format representing the number of minutes ago to fetch logs.
-- `filter_` (string, optional) (default: )
-- `by` (string, optional) (default: )
+- `since_min_ago` (string) (default: null): A numeric value in string format representing the number of minutes ago to fetch logs.
+- `filter_` (string, optional) (default: null)
+- `by` (string, optional) (default: null)
 
 **Returns:** `string`
 
@@ -305,8 +305,8 @@ No description provided.
 **Supports HTTP methods:** GET, POST
 
 **Parameters:**
-- `filter_player` (string, optional) (default: [])
-- `filter_action` (string, optional) (default: [])
+- `filter_player` (string, optional) (default: null)
+- `filter_action` (string, optional) (default: null)
 - `inclusive_filter` (boolean, optional) (default: True)
 - `start` (integer, optional) (default: 0)
 - `end` (integer, optional) (default: 10000)
@@ -323,9 +323,9 @@ No description provided.
 **Supports HTTP methods:** GET
 
 **Parameters:**
-- `since_min_ago` (string | integer) (default: None): Expects a numeric value.
-- `filter_action` (string, optional) (default: None)
-- `filter_player` (string, optional) (default: None)
+- `since_min_ago` (string | integer) (default: null): Expects a numeric value.
+- `filter_action` (string, optional) (default: null)
+- `filter_player` (string, optional) (default: null)
 
 **Returns:** `object`
 
@@ -337,10 +337,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any, optional) (default: None)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -352,10 +352,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean, optional) (default: False)
-- `kwargs` (any, optional) (default: None)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -367,10 +367,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean, optional) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -382,10 +382,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean, optional) (default: False)
-- `kwargs` (any, optional) (default: None)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -520,10 +520,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -535,10 +535,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -550,10 +550,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -565,10 +565,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `user_config` (any) (default: None)
+- `by` (string) (default: null)
+- `user_config` (any) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -580,10 +580,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -606,10 +606,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -621,10 +621,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -636,10 +636,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -651,10 +651,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -666,10 +666,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -681,7 +681,7 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `value` (boolean) (default: None)
+- `value` (boolean) (default: null)
 
 **Returns:** `boolean`
 
@@ -693,7 +693,7 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `max_diff` (integer) (default: None)
+- `max_diff` (integer) (default: null)
 
 **Returns:** `boolean`
 
@@ -803,10 +803,10 @@ Kick selected player.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_name` (any) (default: None)
-- `reason` (any) (default: None)
-- `by` (string, optional) (default: None)
-- `player_id` (string, optional) (default: None)
+- `player_name` (any) (default: null)
+- `reason` (any) (default: null)
+- `by` (string, optional) (default: null)
+- `player_id` (string, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -829,7 +829,7 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `minutes` (integer | string) (default: None): Expects numeric value.
+- `minutes` (integer | string) (default: null): Expects numeric value.
 
 **Returns:** `boolean`
 
@@ -841,7 +841,7 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `max_ms` (integer | string) (default: None): Expects numeric value.
+- `max_ms` (integer | string) (default: null): Expects numeric value.
 
 **Returns:** `boolean`
 
@@ -853,10 +853,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean, optional) (default: False)
-- `kwargs` (any, optional) (default: None)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -868,10 +868,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean, optional) (default: False)
-- `kwargs` (any, optional) (default: None)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -883,7 +883,7 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `value` (boolean) (default: None)
+- `value` (boolean) (default: null)
 
 **Returns:** `boolean`
 
@@ -895,7 +895,7 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `threshold_pairs` (any) (default: None)
+- `threshold_pairs` (any) (default: null)
 
 **Returns:** `string | boolean`
 
@@ -907,10 +907,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean, optional) (default: False)
-- `kwargs` (any, optional) (default: None)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -922,10 +922,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean, optional) (default: False)
-- `kwargs` (any, optional) (default: None)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -961,7 +961,7 @@ get all bans from player_id
 **Supports HTTP methods:** GET
 
 **Parameters:**
-- `player_id` (string | integer) (default: None): Expects numeric value.
+- `player_id` (string | integer) (default: null): Expects numeric value.
 
 **Returns:** `Array<object>`
 
@@ -1028,8 +1028,8 @@ Permanently ban a player by player name or player ID.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_name` (any, optional) (default: None)
-- `player_id` (any, optional) (default: None)
+- `player_name` (any, optional) (default: null)
+- `player_id` (any, optional) (default: null)
 - `reason` (any, optional) (default: "")
 - `by` (any, optional) (default: "")
 
@@ -1043,7 +1043,7 @@ Remove a perma ban by ban log. Note that a player ID is a valid ban log.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_id` (string) (default: None)
+- `player_id` (string) (default: null)
 
 **Returns:** `boolean`
 
@@ -1055,7 +1055,7 @@ Remove a temp ban by player ID or game server ban log.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_id` (string) (default: None)
+- `player_id` (string) (default: null)
 
 **Returns:** `boolean`
 
@@ -1067,10 +1067,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean, optional) (default: False)
-- `kwargs` (any, optional) (default: None)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -1082,10 +1082,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean, optional) (default: False)
-- `kwargs` (any, optional) (default: None)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -1097,11 +1097,11 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_name` (string, optional) (default: None)
-- `player_id` (string, optional) (default: None)
+- `player_name` (string, optional) (default: null)
+- `player_id` (string, optional) (default: null)
 - `duration_hours` (integer, optional) (default: 2)
-- `reason` (string, optional) (default: )
-- `by` (string, optional) (default: )
+- `reason` (string, optional) (default: null)
+- `by` (string, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -1116,7 +1116,7 @@ again. To remove any bans or blacklists, use `unblacklist_player` instead.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_id` (string) (default: None): steam_id_64 or windows store ID
+- `player_id` (string) (default: null): steam_id_64 or windows store ID
 
 **Returns:** `boolean`
 
@@ -1129,9 +1129,9 @@ No description provided.
 
 **Parameters:**
 - `by` (string) (default: <API Key User>)
-- `config` (object) (default: None)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean, optional) (default: False)
-- `kwargs` (any, optional) (default: None)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -1144,9 +1144,9 @@ No description provided.
 
 **Parameters:**
 - `by` (string) (default: <API Key User>)
-- `config` (object) (default: None)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean, optional) (default: False)
-- `kwargs` (any, optional) (default: None)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -1158,10 +1158,10 @@ Adds a new record to a blacklist.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_id` (string) (default: None): steam_id_64 or windows store ID to blacklist.
-- `blacklist_id` (integer) (default: None): The ID of the blacklist to use.
-- `reason` (string) (default: None): The reason the player was blacklisted for.
-- `expires_at` (any, optional) (default: None): When the blacklist should expire, if ever.
+- `player_id` (string) (default: null): steam_id_64 or windows store ID to blacklist.
+- `blacklist_id` (integer) (default: null): The ID of the blacklist to use.
+- `reason` (string) (default: null): The reason the player was blacklisted for.
+- `expires_at` (any, optional) (default: null): When the blacklist should expire, if ever.
 - `admin_name` (string, optional) (default: <API Key User>): The person/tool that is blacklisting the player.
 
 **Returns:** `object` of record details.
@@ -1174,9 +1174,9 @@ Creates a new, empty blacklist.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `name` (string) (default: None): Name for the list
+- `name` (string) (default: null): Name for the list
 - `sync` (string, optional) (default: "KICK_ONLY"): Method to use for synchronizing an active record with the game server.
-- `servers` (Array<integer | string>, optional) (default: None): A sequence of server numbers which this blacklist will apply to. `None` means all servers.
+- `servers` (Array<integer | string>, optional) (default: null): A sequence of server numbers which this blacklist will apply to. `None` means all servers.
 
 **Returns:** `object` of blacklist details.
 
@@ -1188,7 +1188,7 @@ Removes a blacklist alongside all of its records.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `blacklist_id` (integer) (default: None): The ID of the blacklist to delete.
+- `blacklist_id` (integer) (default: null): The ID of the blacklist to delete.
 
 **Returns:** `boolean`
 
@@ -1200,7 +1200,7 @@ Removes a blacklist record.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `record_id` (integer) (default: None)
+- `record_id` (integer) (default: null)
 
 **Returns:** `boolean`
 
@@ -1212,10 +1212,10 @@ Edits a blacklist.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `blacklist_id` (integer) (default: None): The ID of the blacklist to edit.
-- `name` (string) (default: MISSING): The name of the blacklist.
-- `sync_method` (any) (default: MISSING): The method to use for synchronizing records with the game server.
-- `servers` (any) (default: None): A sequence of server numbers which this blacklist will apply to. `None` means all servers.
+- `blacklist_id` (integer) (default: null): The ID of the blacklist to edit.
+- `name` (string) (default: null): The name of the blacklist.
+- `sync_method` (any) (default: null): The method to use for synchronizing records with the game server.
+- `servers` (any) (default: null): A sequence of server numbers which this blacklist will apply to. `None` means all servers.
 
 **Returns:** `None`
 
@@ -1230,10 +1230,10 @@ delete this record and create a new one.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `record_id` (integer) (default: None): The ID of the record to edit.
-- `blacklist_id` (integer, optional) (default: MISSING): The ID of the blacklist this record should be part of.
-- `reason` (string, optional) (default: MISSING): The reason the player was blacklisted for.
-- `expires_at` (any, optional) (default: MISSING): When the blacklist should expire, if ever.
+- `record_id` (integer) (default: null): The ID of the record to edit.
+- `blacklist_id` (integer, optional) (default: null): The ID of the blacklist this record should be part of.
+- `reason` (string, optional) (default: null): The reason the player was blacklisted for.
+- `expires_at` (any, optional) (default: null): When the blacklist should expire, if ever.
 
 **Returns:** `boolean`
 
@@ -1245,7 +1245,7 @@ Get a blacklist and its respective records.
 **Supports HTTP methods:** GET
 
 **Parameters:**
-- `blacklist_id` (integer) (default: None): The ID of the blacklist to get.
+- `blacklist_id` (integer) (default: null): The ID of the blacklist to get.
 
 **Returns:** `object`
 
@@ -1278,9 +1278,9 @@ Get all blacklist records.
 **Supports HTTP methods:** GET
 
 **Parameters:**
-- `player_id` (string) (default: None)
-- `reason` (string) (default: None)
-- `blacklist_id` (integer) (default: None)
+- `player_id` (string) (default: null)
+- `reason` (string) (default: null)
+- `blacklist_id` (integer) (default: null)
 - `exclude_expired` (boolean) (default: False)
 - `page_size` (integer) (default: 50)
 - `page` (integer) (default: 1)
@@ -1307,7 +1307,7 @@ Expires all blacklists of a player and unbans them from all servers.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_id` (string) (default: None): steam_id_64 or windows store ID
+- `player_id` (string) (default: null): steam_id_64 or windows store ID
 
 **Returns:** `boolean`
 
@@ -1326,10 +1326,10 @@ Adds a new flag to the specified player_id
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_id` (string) (default: None): steam_id_64 or windows store ID.
-- `flag` (string) (default: None): The flag to add.
-- `player_name` (string, optional) (default: None): The players name which will be added as an alias.
-- `comment` (string, optional) (default: None)
+- `player_id` (string) (default: null): steam_id_64 or windows store ID.
+- `flag` (string) (default: null): The flag to add.
+- `player_name` (string, optional) (default: null): The players name which will be added as an alias.
+- `comment` (string, optional) (default: null)
 
 **Returns:** `object` with flag parameters.
 
@@ -1341,8 +1341,8 @@ No description provided.
 **Supports HTTP methods:** GET
 
 **Parameters:**
-- `player_name` (string) (default: None)
-- `player` (any) (default: None)
+- `player_name` (string) (default: null)
+- `player` (any) (default: null)
 
 **Returns:** `object`
 
@@ -1367,7 +1367,7 @@ No description provided.
 **Supports HTTP methods:** GET
 
 **Parameters:**
-- `player_id` (string) (default: None)
+- `player_id` (string) (default: null)
 
 **Returns:** `Array<object>`
 
@@ -1379,7 +1379,7 @@ No description provided.
 **Supports HTTP methods:** GET
 
 **Parameters:**
-- `player_name` (string) (default: None)
+- `player_name` (string) (default: null)
 - `can_fail` (any, optional) (default: False)
 
 **Returns:** `object`
@@ -1392,7 +1392,7 @@ No description provided.
 **Supports HTTP methods:** GET
 
 **Parameters:**
-- `player_id` (string) (default: None)
+- `player_id` (string) (default: null)
 
 **Returns:** `Array<object>`
 
@@ -1404,7 +1404,7 @@ No description provided.
 **Supports HTTP methods:** GET
 
 **Parameters:**
-- `player_id` (string) (default: None)
+- `player_id` (string) (default: null)
 - `num_sessions` (integer, optional) (default: 10)
 
 **Returns:** `object` with the following properties:
@@ -1460,16 +1460,16 @@ No description provided.
 **Parameters:**
 - `page` (integer, optional) (default: 1)
 - `page_size` (integer, optional) (default: 500)
-- `last_seen_from` (string, optional) (default: None)
-- `last_seen_till` (string, optional) (default: None)
-- `player_id` (string, optional) (default: None)
-- `player_name` (string, optional) (default: None)
-- `blacklisted` (boolean, optional) (default: None)
-- `is_watched` (boolean, optional) (default: None)
+- `last_seen_from` (string, optional) (default: null)
+- `last_seen_till` (string, optional) (default: null)
+- `player_id` (string, optional) (default: null)
+- `player_name` (string, optional) (default: null)
+- `blacklisted` (boolean, optional) (default: null)
+- `is_watched` (boolean, optional) (default: null)
 - `exact_name_match` (boolean, optional) (default: False)
 - `ignore_accent` (boolean, optional) (default: True)
-- `flags` (string | Array<string>, optional) (default: None)
-- `country` (string, optional) (default: None)
+- `flags` (string | Array<string>, optional) (default: null)
+- `country` (string, optional) (default: null)
 
 **Returns:** `object` with the following properties:
 - `total`: `integer`,
@@ -1485,8 +1485,8 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_id` (string) (default: None)
-- `comment` (string) (default: None)
+- `player_id` (string) (default: null)
+- `comment` (string) (default: null)
 - `by` (string, optional) (default: <API Key User>)
 
 **Returns:** `None`
@@ -1499,8 +1499,8 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_name` (string) (default: None)
-- `reason` (string) (default: None)
+- `player_name` (string) (default: null)
+- `reason` (string) (default: null)
 - `by` (string, optional) (default: <API Key User>)
 
 **Returns:** `boolean`
@@ -1513,7 +1513,7 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_name` (string) (default: None)
+- `player_name` (string) (default: null)
 
 **Returns:** `boolean`
 
@@ -1525,7 +1525,7 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_name` (any) (default: None)
+- `player_name` (any) (default: null)
 - `by` (any, optional) (default: <API Key User>)
 
 **Returns:** `boolean`
@@ -1538,9 +1538,9 @@ Flags can be removed either by flag_id (database key) or by passing a player ID 
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `flag_id` (integer, optional) (default: None): The database primary key of the flag record to delete.
-- `player_id` (string, optional) (default: None): steam_id_64 or windows store ID.
-- `flag` (string, optional) (default: None): The flag to remove from player if present
+- `flag_id` (integer, optional) (default: null): The database primary key of the flag record to delete.
+- `player_id` (string, optional) (default: null): steam_id_64 or windows store ID.
+- `flag` (string, optional) (default: null): The flag to remove from player if present
 
 **Returns:** `object` with flag parameters.
 
@@ -1552,7 +1552,7 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_id` (integer | string) (default: None)
+- `player_id` (integer | string) (default: null)
 
 **Returns:** `boolean`
 
@@ -1564,10 +1564,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_id` (string) (default: None)
-- `reason` (string) (default: None)
-- `by` (string) (default: None)
-- `player_name` (string, optional) (default: None)
+- `player_id` (string) (default: null)
+- `reason` (string) (default: null)
+- `by` (string) (default: null)
+- `player_name` (string, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -1576,15 +1576,17 @@ No description provided.
 ### **Messaging**
 
 #### `message_player`
-No description provided.
+Send ingame admin message to a player.
+
+Requires `player_id` or `player_name`.
 
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_name` (any) (default: None)
-- `player_id` (any) (default: None)
-- `message` (string) (default: )
-- `by` (string) (default: )
+- `player_name` (any) (default: null)
+- `player_id` (any) (default: null)
+- `message` (string) (default: null)
+- `by` (string) (default: <API Key User>)
 - `save_message` (boolean) (default: False)
 
 **Returns:** `string`
@@ -1597,10 +1599,10 @@ Add a new message template and return the ID of the new record
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `title` (string) (default: None)
-- `content` (string) (default: None)
-- `category` (any) (default: None)
-- `by` (string) (default: None)
+- `title` (string) (default: null)
+- `content` (string) (default: null)
+- `category` (any) (default: null)
+- `by` (string) (default: null)
 
 **Returns:** `integer`
 
@@ -1612,7 +1614,7 @@ Delete a specific message template
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `id` (integer) (default: None)
+- `id` (integer) (default: null)
 
 **Returns:** `boolean`
 
@@ -1625,7 +1627,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -1636,7 +1638,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -1647,7 +1649,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -1657,11 +1659,11 @@ Add a new message template and return the ID of the new record
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `id` (integer) (default: None)
-- `title` (string, optional) (default: None)
-- `content` (string, optional) (default: None)
-- `category` (any) (default: None)
-- `by` (string) (default: None)
+- `id` (integer) (default: null)
+- `title` (string, optional) (default: null)
+- `content` (string, optional) (default: null)
+- `category` (string | rcon.types.MessageTemplateCategory) (default: null)
+- `by` (string) (default: <API Key User>)
 
 **Returns:** `null`
 
@@ -1674,7 +1676,18 @@ Get all message templates by category
 
 **No parameters required.**
 
-**Returns:** `<class 'rcon.types.AllMessageTemplateTypes'>`
+**Returns:** `object`
+
+**Return Example:**
+
+```json
+{
+    "BROADCAST": [],
+    "MESSAGE": [],
+    "REASON": [],
+    "WELCOME": []
+}
+```
 
 ---
 
@@ -1685,15 +1698,31 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
+
+**Return Example:**
+
+```json
+{
+    "StandardWelcomeMessagesUserConfig": {
+        "messages": []
+    },
+    "StandardBroadcastMessagesUserConfig": {
+        "messages": []
+    },
+    "StandardPunishmentMessagesUserConfig": {
+        "messages": []
+    }
+},
+```
 
 ---
 
 #### `get_broadcast_message`
-Returns the current broadcast message if the cache is set
+Returns the current broadcast message if the cache is set.
 
 There is no RCON command to get the current broadcast message so it can only
-be retrieved if it was set by CRCON and the cache has not expired
+be retrieved if it was set by CRCON and the cache has not expired.
 
 **Supports HTTP methods:** GET
 
@@ -1704,14 +1733,14 @@ be retrieved if it was set by CRCON and the cache has not expired
 ---
 
 #### `get_message_template`
-Return the message template for the specified record if it exists
+Return the message template for the specified record if it exists.
 
 **Supports HTTP methods:** GET
 
 **Parameters:**
-- `id` (integer) (default: None)
+- `id` (integer) (default: null)
 
-**Returns:** `rcon.types.MessageTemplateType | None`
+**Returns:** `object | null`
 
 ---
 
@@ -1722,7 +1751,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `list[rcon.types.MessageTemplateCategory]`
+**Returns:** `Array<string>`
 
 ---
 
@@ -1732,9 +1761,9 @@ Get all possible message type categories
 **Supports HTTP methods:** GET
 
 **Parameters:**
-- `category` (any) (default: None)
+- `category` (any) (default: null)
 
-**Returns:** `list[rcon.types.MessageTemplateType]`
+**Returns:** `array`
 
 ---
 
@@ -1745,7 +1774,8 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `<class 'rcon.user_config.standard_messages.StandardBroadcastMessagesUserConfig'>`
+**Returns:** `object` with the following properties:
+- `messages`: `Array<object>`
 
 ---
 
@@ -1756,7 +1786,8 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `<class 'rcon.user_config.standard_messages.StandardPunishmentMessagesUserConfig'>`
+**Returns:** `object` with the following properties:
+- `messages`: `Array<object>`
 
 ---
 
@@ -1767,7 +1798,8 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `<class 'rcon.user_config.standard_messages.StandardWelcomeMessagesUserConfig'>`
+**Returns:** `object` with the following properties:
+- `messages`: `Array<object>`
 
 ---
 
@@ -1778,17 +1810,17 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `string | null`
 
 ---
 
 #### `set_broadcast`
-Set the in game broadcast message and return the previous message if set
+Set the in game broadcast message and return the previous message if set.
 
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `message` (string) (default: None)
+- `message` (string) (default: null)
 
 **Returns:** `string`
 
@@ -1800,10 +1832,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: false)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -1815,10 +1847,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean) (default: false)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -1830,22 +1862,22 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean) (default: false)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
 ---
 
 #### `set_welcome_message`
-Set the in game welcome (rules) message and return the previous message if set
+Set the in game welcome (rules) message and return the previous message if set.
 
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `message` (string) (default: None)
+- `message` (string) (default: null)
 
 **Returns:** `string`
 
@@ -1857,10 +1889,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean) (default: false)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -1872,10 +1904,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean) (default: false)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -1887,10 +1919,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean) (default: false)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -1904,11 +1936,11 @@ Adds VIP status on the game server and adds or updates their PlayerVIP record.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_id` (string) (default: None)
-- `description` (string) (default: None)
-- `expiration` (string, optional) (default: None)
+- `player_id` (string) (default: null)
+- `description` (string) (default: null)
+- `expiration` (string, optional) (default: null)
 
-**Returns:** `string`
+**Returns:** `boolean`
 
 ---
 
@@ -1919,7 +1951,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -1930,7 +1962,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -1941,18 +1973,12 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
 #### `download_vips`
-No description provided.
-
-**Supports HTTP methods:** GET
-
-**No parameters required.**
-
-**Returns:** `None`
+Not supported by this interface.
 
 ---
 
@@ -1963,7 +1989,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `<class 'rcon.user_config.expired_vips.ExpiredVipsUserConfig'>`
+**Returns:** `object`
 
 ---
 
@@ -1974,7 +2000,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `<class 'rcon.user_config.real_vip.RealVipUserConfig'>`
+**Returns:** `object`
 
 ---
 
@@ -1985,23 +2011,23 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `<class 'rcon.user_config.seed_vip.SeedVIPUserConfig'>`
+**Returns:** `object`
 
 ---
 
 #### `get_vip_ids`
-No description provided.
+Get a list of all VIPs.
 
 **Supports HTTP methods:** GET
 
 **No parameters required.**
 
-**Returns:** `list[rcon.types.VipIdType]`
+**Returns:** `Array<object>`
 
 ---
 
 #### `get_vip_slots_num`
-No description provided.
+Get number of VIP slots.
 
 **Supports HTTP methods:** GET
 
@@ -2012,7 +2038,7 @@ No description provided.
 ---
 
 #### `get_vips_count`
-No description provided.
+Get number of VIPs ingame.
 
 **Supports HTTP methods:** GET
 
@@ -2039,7 +2065,7 @@ Removes VIP status on the game server and removes their PlayerVIP record.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_id` (any) (default: None)
+- `player_id` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -2051,10 +2077,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -2066,10 +2092,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -2081,22 +2107,22 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
 ---
 
 #### `set_vip_slots_num`
-No description provided.
+Set number of VIP slots.
 
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `value` (integer) (default: None)
+- `value` (integer) (default: null)
 
 **Returns:** `boolean`
 
@@ -2130,10 +2156,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -2145,10 +2171,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -2160,10 +2186,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -2177,9 +2203,9 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `map_name` (string) (default: None)
-- `after_map_name` (string, optional) (default: None)
-- `after_map_name_number` (integer, optional) (default: None)
+- `map_name` (string) (default: null)
+- `after_map_name` (string, optional) (default: null)
+- `after_map_name_number` (integer, optional) (default: null)
 
 **Returns:** `string`
 
@@ -2191,7 +2217,7 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `map_name` (string) (default: None)
+- `map_name` (string) (default: null)
 
 **Returns:** `None`
 
@@ -2203,9 +2229,9 @@ Add the given maps to the rotation, returns the game server response for each ma
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `map_names` (any) (default: None)
+- `map_names` (Array<string>) (default: null)
 
-**Returns:** `list[tuple[str, str]]`
+**Returns:** `Array<[string, string]>`
 
 ---
 
@@ -2215,9 +2241,9 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `map_names` (any) (default: None)
+- `map_names` (Array<string>) (default: null)
 
-**Returns:** `None`
+**Returns:** `Array<[string, string]>`
 
 ---
 
@@ -2228,7 +2254,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -2239,18 +2265,47 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `list[str]`
+**Returns:** `Array<string>`
 
 ---
 
 #### `get_map`
-No description provided.
+Get current map.
 
 **Supports HTTP methods:** GET
 
 **No parameters required.**
 
-**Returns:** `<class 'rcon.maps.Layer'>`
+**Returns:** `object`
+
+**Return Example:**
+
+```json
+{
+    "id": "stmariedumont_warfare",
+    "map": {
+        "id": "stmariedumont",
+        "name": "ST MARIE DU MONT",
+        "tag": "BRC",
+        "pretty_name": "St. Marie Du Mont",
+        "shortname": "SMDM",
+        "allies": {
+            "name": "us",
+            "team": "allies"
+        },
+        "axis": {
+            "name": "ger",
+            "team": "axis"
+        },
+        "orientation": "vertical"
+    },
+    "game_mode": "warfare",
+    "attackers": null,
+    "environment": "day",
+    "pretty_name": "St. Marie Du Mont Warfare",
+    "image_name": "stmariedumont-day.webp"
+},
+```
 
 ---
 
@@ -2261,7 +2316,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `Array<object>`
 
 ---
 
@@ -2272,7 +2327,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `list[rcon.maps.Layer]`
+**Returns:** `Array<object>`
 
 ---
 
@@ -2282,7 +2337,7 @@ No description provided.
 **Supports HTTP methods:** GET
 
 **Parameters**
-- `map_id` (integer) (default: None)
+- `map_id` (integer) (default: null)
 
 **Returns:** `None`
 
@@ -2300,13 +2355,13 @@ No description provided.
 ---
 
 #### `get_maps`
-No description provided.
+Get a list of all maps.
 
 **Supports HTTP methods:** GET
 
 **No parameters required.**
 
-**Returns:** `list[rcon.maps.Layer]`
+**Returns:** `Array<object>`
 
 ---
 
@@ -2317,7 +2372,7 @@ Return the next map in the rotation as determined by the gameserver through the 
 
 **No parameters required.**
 
-**Returns:** `<class 'rcon.maps.Layer'>`
+**Returns:** `object`
 
 ---
 
@@ -2328,7 +2383,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -2339,7 +2394,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `<class 'rcon.user_config.vote_map.VoteMapUserConfig'>`
+**Returns:** `object`
 
 ---
 
@@ -2350,7 +2405,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `list[rcon.types.VoteMapStatusType]`
+**Returns:** `Array<object>`
 
 ---
 
@@ -2361,7 +2416,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `list[str]`
+**Returns:** `Array<string>`
 
 ---
 
@@ -2371,10 +2426,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `map_name` (string) (default: None)
-- `map_number` (integer, optional) (default: None)
+- `map_name` (string) (default: null)
+- `map_number` (integer, optional) (default: null)
 
-**Returns:** `None`
+**Returns:** `boolean`
 
 ---
 
@@ -2384,9 +2439,9 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `map_name` (string) (default: None)
+- `map_name` (string) (default: null)
 
-**Returns:** `None`
+**Returns:** `boolean`
 
 ---
 
@@ -2396,9 +2451,9 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `map_names` (any) (default: None)
+- `map_names` (Array<string>) (default: null)
 
-**Returns:** `typing.Literal['SUCCESS']`
+**Returns:** `string`
 
 ---
 
@@ -2408,9 +2463,9 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `map_names` (any) (default: None)
+- `map_names` (any) (default: null)
 
-**Returns:** `None`
+**Returns:** `boolean`
 
 ---
 
@@ -2421,7 +2476,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `boolean`
 
 ---
 
@@ -2432,7 +2487,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `list[rcon.types.VoteMapStatusType]`
+**Returns:** `array`
 
 ---
 
@@ -2442,9 +2497,9 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `map_name` (string) (default: None)
+- `map_name` (string) (default: null)
 
-**Returns:** `null`
+**Returns:** `boolean`
 
 ---
 
@@ -2454,9 +2509,9 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `enabled` (boolean) (default: None)
+- `enabled` (boolean) (default: null)
 
-**Returns:** `null`
+**Returns:** `boolean`
 
 ---
 
@@ -2466,9 +2521,9 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `map_names` (any) (default: None)
+- `map_names` (any) (default: null)
 
-**Returns:** `list[rcon.maps.Layer]`
+**Returns:** `Array<object>`
 
 ---
 
@@ -2478,10 +2533,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -2493,7 +2548,7 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `map_names` (any) (default: None)
+- `map_names` (any) (default: null)
 
 **Returns:** `None`
 
@@ -2505,10 +2560,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -2941,10 +2996,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -2956,10 +3011,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -2971,10 +3026,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -2986,10 +3041,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -3001,10 +3056,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -3016,10 +3071,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -3042,10 +3097,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -3057,10 +3112,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -3072,10 +3127,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -3087,10 +3142,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -3102,10 +3157,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -3117,7 +3172,7 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `name` (string) (default: None)
+- `name` (string) (default: null)
 
 **Returns:** `None`
 
@@ -3129,10 +3184,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -3144,10 +3199,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -3159,10 +3214,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -3173,10 +3228,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -3188,10 +3243,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -3202,10 +3257,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -3216,10 +3271,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -3230,10 +3285,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -3245,10 +3300,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -3261,10 +3316,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -3275,10 +3330,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -3289,10 +3344,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -3304,10 +3359,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -3319,10 +3374,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -3334,10 +3389,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -3349,10 +3404,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -3364,10 +3419,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: None)
-- `config` (any) (default: None)
+- `by` (string) (default: null)
+- `config` (object) (default: null)
 - `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: None)
+- `kwargs` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -3436,7 +3491,7 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `profanities` (any) (default: None)
+- `profanities` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -3448,7 +3503,7 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `profanities` (any) (default: None)
+- `profanities` (any) (default: null)
 
 **Returns:** `boolean`
 
@@ -3460,9 +3515,9 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `profanities` (any) (default: None)
+- `profanities` (any) (default: null)
 
-**Returns:** `list[str]`
+**Returns:** `Array<string>`
 
 ---
 
@@ -3475,7 +3530,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `list[str]`
+**Returns:** `Array<string>`
 
 ---
 
@@ -3546,8 +3601,8 @@ No description provided.
 **Supports HTTP methods:** GET
 
 **Parameters:**
-- `start` (integer) (default: None)
-- `end` (integer) (default: None)
+- `start` (integer) (default: null)
+- `end` (integer) (default: null)
 
 **Returns:** `None`
 
@@ -3593,7 +3648,7 @@ No description provided.
 **Supports HTTP methods:** GET
 
 **Parameters:**
-- `row` (integer) (default: None)
+- `row` (integer) (default: null)
 
 **Returns:** `None`
 
@@ -3606,7 +3661,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `typing.List[typing.List[str]]`
+**Returns:** `typing.List[typing.Array<string>]`
 
 ---
 
@@ -3682,7 +3737,7 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `objectives` (any) (default: None)
+- `objectives` (any) (default: null)
 - `random_constraints` (any) (default: 0)
 
 **Returns:** `None`
@@ -3695,7 +3750,7 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `value` (integer) (default: None)
+- `value` (integer) (default: null)
 
 **Returns:** `boolean`
 
@@ -3707,7 +3762,7 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `minutes` (integer) (default: None)
+- `minutes` (integer) (default: null)
 
 **Returns:** `boolean`
 
