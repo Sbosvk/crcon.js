@@ -4,7 +4,7 @@
 
 This module provides a wrapper around various API endpoints, facilitating interaction with the backend. Each method corresponds to an API endpoint and uses the fetch API to perform HTTP requests.
 
-This version is fully compatible with the CRCON v10 API, ensuring all current features and endpoints are supported.
+This version is fully compatible with the CRCON API v11, ensuring all current features and endpoints (with download exceptions) are supported.
 
 ## Constructor
 
