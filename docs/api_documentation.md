@@ -520,10 +520,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -535,10 +535,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -550,10 +550,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -580,10 +580,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -606,10 +606,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -621,10 +621,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -636,10 +636,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -651,10 +651,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -666,10 +666,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -2593,7 +2593,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -2604,15 +2604,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
-
----
-
-**Supports HTTP methods:** POST
-
-**No parameters required.**
-
-**Returns:** `boolean`
+**Returns:** `object`
 
 ---
 
@@ -2623,7 +2615,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -2634,7 +2626,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -2645,7 +2637,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -2656,7 +2648,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `array`
 
 ---
 
@@ -2667,7 +2659,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `Array<object>`
 
 ---
 
@@ -2678,7 +2670,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** UNKNOWN
 
 ---
 
@@ -2689,18 +2681,18 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `<class 'rcon.user_config.steam.SteamUserConfig'>`
+**Returns:** `object`
 
 ---
 
 #### `get_version`
-No description provided.
+Get CRCON version.
 
 **Supports HTTP methods:** GET
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `string`
 
 ---
 
@@ -2711,7 +2703,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -2722,7 +2714,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** UNKNOWN
 
 ---
 
@@ -2733,7 +2725,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** UNKNOWN
 
 ---
 
@@ -2744,7 +2736,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -2755,7 +2747,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -2766,7 +2758,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -2777,7 +2769,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -2788,7 +2780,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -2799,7 +2791,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -2810,7 +2802,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -2821,7 +2813,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -2832,7 +2824,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -2843,7 +2835,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -2854,7 +2846,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `<class 'rcon.user_config.webhooks.AdminPingWebhooksUserConfig'>`
+**Returns:** `object`
 
 ---
 
@@ -2865,7 +2857,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -2876,7 +2868,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `<class 'rcon.user_config.webhooks.AuditWebhooksUserConfig'>`
+**Returns:** `object`
 
 ---
 
@@ -2887,7 +2879,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `<class 'rcon.user_config.webhooks.CameraWebhooksUserConfig'>`
+**Returns:** `object`
 
 ---
 
@@ -2898,7 +2890,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `<class 'rcon.user_config.camera_notification.CameraNotificationUserConfig'>`
+**Returns:** `object`
 
 ---
 
@@ -2909,7 +2901,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -2920,7 +2912,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `<class 'rcon.user_config.webhooks.ChatWebhooksUserConfig'>`
+**Returns:** `object`
 
 ---
 
@@ -2931,7 +2923,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -2942,7 +2934,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `<class 'rcon.user_config.rcon_connection_settings.RconConnectionSettingsUserConfig'>`
+**Returns:** `object`
 
 ---
 
@@ -2953,7 +2945,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `<class 'rcon.user_config.rcon_server_settings.RconServerSettingsUserConfig'>`
+**Returns:** `object`
 
 ---
 
@@ -2964,7 +2956,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -2975,7 +2967,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `<class 'rcon.user_config.scorebot.ScorebotUserConfig'>`
+**Returns:** `object`
 
 ---
 
@@ -2986,7 +2978,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `<class 'rcon.user_config.webhooks.WatchlistWebhooksUserConfig'>`
+**Returns:** `object`
 
 ---
 
@@ -2996,10 +2988,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -3011,10 +3003,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -3026,10 +3018,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -3041,10 +3033,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -3056,10 +3048,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -3071,10 +3063,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -3097,10 +3089,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -3112,10 +3104,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -3127,10 +3119,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -3142,10 +3134,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -3157,10 +3149,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -3184,10 +3176,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -3199,10 +3191,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -3214,10 +3206,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -3228,10 +3220,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -3243,10 +3235,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -3257,10 +3249,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -3271,10 +3263,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -3285,10 +3277,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -3300,10 +3292,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -3316,10 +3308,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -3330,10 +3322,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -3344,10 +3336,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -3359,10 +3351,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -3374,10 +3366,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -3389,10 +3381,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -3404,10 +3396,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -3419,10 +3411,10 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
 - `config` (object) (default: null)
-- `reset_to_default` (boolean) (default: False)
-- `kwargs` (any) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
 **Returns:** `boolean`
 
@@ -3435,7 +3427,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `<class 'rcon.user_config.gtx_server_name.GtxServerNameChangeUserConfig'>`
+**Returns:** `object`
 
 ---
 
@@ -3446,12 +3438,14 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
+### **Game Settings & Status**
+
 #### `get_name`
-No description provided.
+Get server name.
 
 **Supports HTTP methods:** GET
 
@@ -3462,28 +3456,26 @@ No description provided.
 ---
 
 #### `get_public_info`
-No description provided.
+Get public game info.
 
 **Supports HTTP methods:** GET
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
 #### `get_status`
-No description provided.
+Get game status.
 
 **Supports HTTP methods:** GET
 
 **No parameters required.**
 
-**Returns:** `<class 'rcon.types.StatusType'>`
+**Returns:** `object`
 
 ---
-
-### **Game Settings & Status**
 
 #### `ban_profanities`
 No description provided.
@@ -3491,7 +3483,7 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `profanities` (any) (default: null)
+- `profanities` (Array<string>) (default: null)
 
 **Returns:** `boolean`
 
@@ -3515,7 +3507,7 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `profanities` (any) (default: null)
+- `profanities` (Array<string>) (default: null)
 
 **Returns:** `Array<string>`
 
@@ -3559,17 +3551,11 @@ No description provided.
 #### `get_gamestate`
 Returns player counts, team scores, remaining match time and current/next map
 
-Players: Allied: 0 - Axis: 1
-Score: Allied: 2 - Axis: 2
-Remaining Time: 0:11:51
-Map: foy_warfare
-Next Map: stmariedumont_warfare
-
 **Supports HTTP methods:** GET
 
 **No parameters required.**
 
-**Returns:** `<class 'rcon.types.GameStateType'>`
+**Returns:** `object`
 
 ---
 
@@ -3580,7 +3566,9 @@ Return stats for the currently playing match
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object` with the following properties:
+- `snapshot_timestamp`: `float`
+- `stats`: `Array<object>`
 
 ---
 
@@ -3591,7 +3579,10 @@ Return stats for all currently connected players (stats are reset on disconnect,
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object` with the following properties:
+- `snapshot_timestamp`: `float`
+- `refresh_interval_sec`: `integer`
+- `stats`: `Array<object>`
 
 ---
 
@@ -3601,10 +3592,10 @@ No description provided.
 **Supports HTTP methods:** GET
 
 **Parameters:**
-- `start` (integer) (default: null)
-- `end` (integer) (default: null)
+- `start` (string) (default: null)
+- `end` (string) (default: null)
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -3626,7 +3617,7 @@ Returns the amount of time left in the round as seconds
 
 **No parameters required.**
 
-**Returns:** `float`
+**Returns:** `integer`
 
 ---
 
@@ -3638,30 +3629,30 @@ No description provided.
 **Parameters:**
 - `page` (integer) (default: 1)
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
 #### `get_objective_row`
-No description provided.
+Get specific objective row for current map. (Array starts at zero)
 
 **Supports HTTP methods:** GET
 
 **Parameters:**
 - `row` (integer) (default: null)
 
-**Returns:** `None`
+**Returns:** `Array<string>`
 
 ---
 
 #### `get_objective_rows`
-No description provided.
+Get all objective rows for current map.
 
 **Supports HTTP methods:** GET
 
 **No parameters required.**
 
-**Returns:** `typing.List[typing.Array<string>]`
+**Returns:** `Array<array>`
 
 ---
 
@@ -3672,7 +3663,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -3694,7 +3685,9 @@ Return the current number of connected players and max players allowed
 
 **No parameters required.**
 
-**Returns:** `<class 'rcon.types.SlotsType'>`
+**Returns:** `object` with the following properties:
+- `current_players`: `integer`
+- `max_players`: `integer`
 
 ---
 
@@ -3705,7 +3698,7 @@ Returns the number of objectives held by the allied/axis team respectively
 
 **No parameters required.**
 
-**Returns:** `tuple[int, int]`
+**Returns:** `Array<integer, integer>`
 
 ---
 
@@ -3727,7 +3720,7 @@ No description provided.
 
 **No parameters required.**
 
-**Returns:** `None`
+**Returns:** `object`
 
 ---
 
@@ -3737,8 +3730,8 @@ No description provided.
 **Supports HTTP methods:** POST
 
 **Parameters:**
-- `objectives` (any) (default: null)
-- `random_constraints` (any) (default: 0)
+- `objectives` (Array<string>) (default: null)
+- `random_constraints` (integer, optional) (default: 0)
 
 **Returns:** `None`
 
