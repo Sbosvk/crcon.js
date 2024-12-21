@@ -4,7 +4,7 @@
 
 This module provides a wrapper around various API endpoints, facilitating interaction with the backend. Each method corresponds to an API endpoint and uses the fetch API to perform HTTP requests.
 
-This version is fully compatible with the CRCON v10 API, ensuring all current features and endpoints are supported.
+This version is fully compatible with the CRCON API v11, ensuring all current features and endpoints (with download exceptions) are supported.
 
 ## Constructor
 
@@ -18,922 +18,3745 @@ This version is fully compatible with the CRCON v10 API, ensuring all current fe
 
 ## Methods
 
-### **Admin Management**
+### Format:
 
-#### `get_admin_groups`
-Fetches the list of admin groups.
+General return structure of all methods:
 
-**Returns:** `Promise<any>`
+**With debugging:**
 
----
+```json
+{
+    "result": object | Array<object> | string | number | boolean | null,
+    "command": string,
+    "arguments": object,
+    "failed": boolean,
+    "error": null | string,
+    "forward_results": null | object,
+    "version": string
+}
+```
 
-#### `get_admin_ids`
-Fetches the list of admin IDs.
+**Standard**
+```json
+{
+    object | Array<object> | string | number | boolean | null
+}
+```
 
-**Returns:** `Promise<any>`
-
----
-
-#### `get_admin_pings_discord_webhooks_config`
-Fetches the configuration for admin ping Discord webhooks.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `get_online_mods`
-Fetches the list of online moderators.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `get_ingame_mods`
-Fetches the list of in-game moderators.
-
-**Returns:** `Promise<any>`
-
----
+### Admin Management
 
 #### `add_admin`
-Adds a new admin.
+Add a new admin to the game server(s).
+
+**Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_id` (string, optional): The player ID of the new admin.
-- `role` (string, optional): The role to assign to the new admin.
-- `description` (string, optional): A description for the new admin.
+- `player_id` (string) (default: null)
+- `role` (string) (default: null)
+- `description` (string, optional) (default: null)
 
-**Returns:** `Promise<any>`
+**Returns:** `boolean`
 
 ---
 
 #### `remove_admin`
-Removes an admin by player ID.
+Remove an admin from the game server.
+
+**Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_id` (string, optional): The player ID of the admin to be removed.
+- `player_id` (string) (default: null)
 
-**Returns:** `Promise<any>`
-
----
-
-#### `get_all_standard_message_config`
-Fetches all standard message configurations.
-
-**Returns:** `Promise<any>`
+**Returns:** `boolean`
 
 ---
 
-#### `get_all_discord_webhooks_config`
-Fetches all Discord webhooks configuration.
+#### `get_admin_groups`
+Get a list of game server admin groups.
 
-**Returns:** `Promise<any>`
+**Supports HTTP methods:** GET
 
----
+**No parameters required.**
 
-#### `describe_admin_pings_discord_webhooks_config`
-Fetches configuration details for admin ping Discord webhooks.
+**Returns:** `Array<string>`
 
-**Returns:** `Promise<any>`
-
----
-
-#### `validate_admin_pings_discord_webhooks_config`
-Validates configuration for admin ping Discord webhooks.
-
-**Parameters:**
-- `by` (string, optional): User initiating the request.
-- `config` (object, optional): Configuration object to validate.
-- `reset_to_default` (boolean, optional): If true, resets to default.
-- `kwargs` (object, optional): Additional arguments.
-
-**Returns:** `Promise<any>`
+**Return Example:**
+```json
+{
+    "result": [
+        "owner",
+        "senior",
+        "junior",
+        "spectator"
+    ]
+}
+```
 
 ---
 
-### **Logs**
+#### `get_admin_ids`
+Returns a list of server admins (all roles).
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `Array<object>`
+
+**Return Example:**
+
+```json
+{
+    "result": [
+        {
+            "player_id": "123123123123123",
+            "name": "John Doe",
+            "role": "Owner"
+        },
+        {
+            "player_id": "321321321321321",
+            "name": "Jane Doe",
+            "role": "Spectator"
+        }
+    ]
+}
+```
+
+---
+
+#### `get_ingame_mods`
+Get a list of ingame mods.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `Array<object>`
+
+---
+
+#### `get_online_mods`
+Get a list of online CRCON mods.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `Array<object>`
+
+**Return Example:**
+
+```json
+{
+    "result": [
+        {
+            "username": "JohnDoe",
+            "player_id": "123123123123123"
+        }
+    ]
+}
+```
+
+---
+
+### Logs
+
+#### `describe_log_line_webhook_config`
+Both native (from the game server) and synthetic (created by CRCON) log types.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `describe_log_stream_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
 
 #### `get_audit_logs`
-Fetches the audit logs.
+No description provided.
 
-**Returns:** `Promise<any>`
+**Supports HTTP methods:** GET
 
----
+**No parameters required.**
 
-#### `get_structured_logs`
-Fetches structured logs with filters.
-
-**Parameters:**
-- `since_min_ago` (number, optional): Logs from the past X minutes.
-- `filter_action` (string, optional): Action to filter logs by.
-- `filter_player` (string, optional): Player to filter logs by.
-
-**Returns:** `Promise<any>`
+**Returns:** `Array<object>`
 
 ---
 
 #### `get_audit_logs_autocomplete`
-Fetches autocomplete suggestions for audit logs.
+No description provided.
 
-**Returns:** `Promise<any>`
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object` with the following properties:
+- `usernames`: `Array<string>`
+- `commands`: `Array<string>`
 
 ---
 
 #### `get_historical_logs`
-Fetches historical logs based on filters.
+No description provided.
+
+**Supports HTTP methods:** GET, POST
 
 **Parameters:**
-- `player_name` (string, optional): The name of the player to filter logs.
-- `player_id` (string, optional): The ID of the player to filter logs.
-- `action` (string, optional): The action type to filter logs.
-- `limit` (number, optional): The number of logs to retrieve.
-- `from_` (string, optional): Start date/time for logs retrieval.
-- `till` (string, optional): End date/time for logs retrieval.
-- `time_sort` (string, optional): Sort order of logs (`asc` or `desc`).
-- `exact_player_match` (boolean, optional): Whether to match the player name exactly.
-- `exact_action` (boolean, optional): Whether to match the action exactly.
-- `server_filter` (string, optional): Filter logs by server.
+- `player_name` (string, optional) (default: null)
+- `player_id` (string, optional) (default: null)
+- `action` (string, optional) (default: null)
+- `limit` (integer, optional) (default: 1000)
+- `from_` (any, optional) (default: null)
+- `till` (any, optional) (default: null)
+- `time_sort` (any, optional) (default: desc)
+- `exact_player_match` (boolean, optional) (default: False)
+- `exact_action` (boolean, optional) (default: True)
+- `server_filter` (string, optional) (default: null)
 
-**Returns:** `Promise<any>`
+**Returns:** `Array<object>` with the following properties:
+- `id`: `<Integer>`
+- `version`: `<Integer>`
+- `creation_time`: `<string>`
+- `event_time`: `<string>`,
+- `type`: `<string>`,
+- `player1_name`: `<null | String>`,
+- `player1_id`: `<null | String>`,
+- `player2_name`: `<null | String>`,
+- `player2_id`: `<null | String>`,
+- `raw`: `<string>`,
+- `content`: `<string>`,
+- `server`: `<string>`,
+- `weapon`: `<null | String>`
 
 ---
 
 #### `get_historical_logs_csv`
-Downloads historical logs as a CSV file.
-
-**Returns:** `Promise<any>`
+Not supported by this interface.
 
 ---
 
-#### `validate_audit_discord_webhooks_config`
-Validates audit webhook configuration.
+#### `get_log_line_webhook_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object` with the following properties:
+- `webhooks`: `Array<object>`
+
+---
+
+#### `get_log_stream_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+**Return Example:**
+
+```json
+    {
+        "result": {
+            "enabled": boolean,
+            "stream_size": integer,
+            "startyp_since_mins": integer,
+            "refresh_frequency_sec": integer,
+            "refresh_since_mins": integer
+        }
+    }
+```
+
+---
+
+#### `get_logs`
+Returns raw text logs from the game server with no parsing performed
+
+You most likely want to use a different method/endpoint to get parsed logs.
+
+**Supports HTTP methods:** GET
 
 **Parameters:**
-- `by` (string, optional): User initiating the request.
-- `config` (object, optional): Configuration to validate.
-- `reset_to_default` (boolean, optional): Reset to default if true.
-- `kwargs` (object, optional): Additional arguments.
+- `since_min_ago` (string) (default: null): A numeric value in string format representing the number of minutes ago to fetch logs.
+- `filter_` (string, optional) (default: null)
+- `by` (string, optional) (default: null)
 
-**Returns:** `Promise<any>`
-
----
-
-### **Auto Moderation**
-
-#### `get_auto_broadcasts_config`
-Fetches the configuration for auto broadcasts.
-
-**Returns:** `Promise<any>`
+**Returns:** `string`
 
 ---
 
-#### `get_auto_mod_level_config`
-Fetches the auto moderation level configuration.
+#### `get_recent_logs`
+No description provided.
 
-**Returns:** `Promise<any>`
-
----
-
-#### `get_auto_mod_no_leader_config`
-Fetches the auto moderation no leader configuration.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `get_auto_mod_seeding_config`
-Fetches the auto moderation seeding configuration.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `get_auto_mod_solo_tank_config`
-Fetches the auto moderation solo tank configuration.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `get_auto_settings`
-Fetches the current auto settings.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `get_autobalance_enabled`
-Fetches the current status of auto balance.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `get_autobalance_threshold`
-Fetches the auto balance threshold.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `get_idle_autokick_time`
-Fetches the idle autokick time.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `get_vac_game_bans_config`
-Fetches the configuration for VAC game bans.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `set_auto_mod_level_config`
-Sets the auto moderation level configuration.
+**Supports HTTP methods:** GET, POST
 
 **Parameters:**
-- `by` (string, optional): User initiating the request.
-- `config` (object, optional): Configuration to set.
-- `reset_to_default` (boolean, optional): Reset to default if true.
-- `kwargs` (object, optional): Additional arguments.
+- `filter_player` (string, optional) (default: null)
+- `filter_action` (string, optional) (default: null)
+- `inclusive_filter` (boolean, optional) (default: True)
+- `start` (integer, optional) (default: 0)
+- `end` (integer, optional) (default: 10000)
+- `exact_player_match` (boolean, optional) (default: True)
+- `exact_action` (boolean, optional) (default: False)
 
-**Returns:** `Promise<any>`
+**Returns:** `object`
 
 ---
 
-#### `set_auto_mod_no_leader_config`
-Sets the auto moderation no leader configuration.
+#### `get_structured_logs`
+No description provided.
+
+**Supports HTTP methods:** GET
 
 **Parameters:**
-- `by` (string, optional): User initiating the request.
-- `config` (object, optional): Configuration to set.
-- `reset_to_default` (boolean, optional): Reset to default if true.
-- `kwargs` (object, optional): Additional arguments.
+- `since_min_ago` (string | integer) (default: null): Expects a numeric value.
+- `filter_action` (string, optional) (default: null)
+- `filter_player` (string, optional) (default: null)
 
-**Returns:** `Promise<any>`
+**Returns:** `object`
 
 ---
 
-#### `set_auto_mod_seeding_config`
-Sets the auto moderation seeding configuration.
+#### `set_log_line_webhook_config`
+No description provided.
+
+**Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string, optional): User initiating the request.
-- `user_config` (object, optional): Configuration to set.
-- `reset_to_default` (boolean, optional): Reset to default if true.
-- `kwargs` (object, optional): Additional arguments.
+- `by` (string) (default: null)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean) (default: False)
+- `kwargs` (any, optional) (default: null)
 
-**Returns:** `Promise<any>`
+**Returns:** `boolean`
 
 ---
 
-#### `set_auto_mod_solo_tank_config`
-Sets the auto moderation solo tank configuration.
+#### `set_log_stream_config`
+No description provided.
+
+**Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string, optional): User initiating the request.
-- `config` (object, optional): Configuration to set.
-- `reset_to_default` (boolean, optional): Reset to default if true.
-- `kwargs` (object, optional): Additional arguments.
+- `by` (string) (default: null)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
-**Returns:** `Promise<any>`
+**Returns:** `boolean`
 
 ---
 
-#### `set_autobalance_enabled`
-Enables or disables auto balance.
+#### `validate_log_line_webhook_config`
+No description provided.
+
+**Supports HTTP methods:** POST
 
 **Parameters:**
-- `value` (boolean, optional): The new status of auto balance.
+- `by` (string) (default: null)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any) (default: null)
 
-**Returns:** `Promise<any>`
+**Returns:** `boolean`
 
 ---
 
-#### `set_autobalance_threshold`
-Sets the auto balance threshold.
+#### `validate_log_stream_config`
+No description provided.
+
+**Supports HTTP methods:** POST
 
 **Parameters:**
-- `max_diff` (number, optional): The maximum difference allowed.
+- `by` (string) (default: null)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
-**Returns:** `Promise<any>`
+**Returns:** `boolean`
 
 ---
+
+### Auto Moderation
 
 #### `describe_auto_broadcasts_config`
-Fetches configuration details for auto broadcasts.
+No description provided.
 
-**Returns:** `Promise<any>`
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `None`
 
 ---
 
 #### `describe_auto_mod_level_config`
-Fetches configuration details for auto moderation levels.
+No description provided.
 
-**Returns:** `Promise<any>`
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `None`
 
 ---
 
-#### `validate_auto_mod_level_config`
-Validates auto moderation level configuration.
+#### `describe_auto_mod_no_leader_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `None`
+
+---
+
+#### `describe_auto_mod_seeding_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `None`
+
+---
+
+#### `describe_auto_mod_solo_tank_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `None`
+
+---
+
+#### `get_auto_broadcasts_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `<class 'rcon.user_config.auto_broadcast.AutoBroadcastUserConfig'>`
+
+---
+
+#### `get_auto_mod_level_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `<class 'rcon.user_config.auto_mod_level.AutoModLevelUserConfig'>`
+
+---
+
+#### `get_auto_mod_no_leader_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `<class 'rcon.user_config.auto_mod_no_leader.AutoModNoLeaderUserConfig'>`
+
+---
+
+#### `get_auto_mod_seeding_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `<class 'rcon.user_config.auto_mod_seeding.AutoModSeedingUserConfig'>`
+
+---
+
+#### `get_auto_mod_solo_tank_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `<class 'rcon.user_config.auto_mod_solo_tank.AutoModNoSoloTankUserConfig'>`
+
+---
+
+#### `get_auto_settings`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `None`
+
+---
+
+#### `set_auto_broadcasts_config`
+No description provided.
+
+**Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string, optional): User initiating the request.
-- `config` (object, optional): Configuration to validate.
-- `reset_to_default` (boolean, optional): Reset to default if true.
-- `kwargs` (object, optional): Additional arguments.
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
-**Returns:** `Promise<any>`
+**Returns:** `boolean`
+
+---
+
+#### `set_auto_mod_level_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `set_auto_mod_no_leader_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `set_auto_mod_seeding_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string) (default: null)
+- `user_config` (any) (default: null)
+- `reset_to_default` (boolean) (default: False)
+- `kwargs` (any) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `set_auto_mod_solo_tank_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `set_auto_settings`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**No parameters required.**
+
+**Returns:** `None`
 
 ---
 
 #### `validate_auto_broadcasts_config`
-Validates auto broadcast configuration.
+No description provided.
+
+**Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string, optional): User initiating the request.
-- `config` (object, optional): Configuration to validate.
-- `reset_to_default` (boolean, optional): Reset to default if true.
-- `kwargs` (object, optional): Additional arguments.
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
-**Returns:** `Promise<any>`
+**Returns:** `boolean`
 
 ---
 
-### **Bans & Blacklists**
+#### `validate_auto_mod_level_config`
+No description provided.
 
-#### `get_ban`
-Fetches ban information for a specific player.
+**Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_id` (string, optional): The ID of the player to fetch ban info for.
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
-**Returns:** `Promise<any>`
-
----
-
-#### `get_bans`
-Fetches the list of all bans.
-
-**Returns:** `Promise<any>`
+**Returns:** `boolean`
 
 ---
 
-#### `get_blacklist`
-Fetches blacklist information for a specific ID.
+#### `validate_auto_mod_no_leader_config`
+No description provided.
+
+**Supports HTTP methods:** POST
 
 **Parameters:**
-- `blacklist_id` (string, optional): The ID of the blacklist to fetch.
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
-**Returns:** `Promise<any>`
+**Returns:** `boolean`
 
 ---
 
-#### `get_blacklist_records`
-Fetches blacklist records based on filters.
+#### `validate_auto_mod_seeding_config`
+No description provided.
+
+**Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_id` (string, optional): The player ID to filter records.
-- `reason` (string, optional): The reason to filter records.
-- `blacklist_id` (string, optional): The blacklist ID to filter records.
-- `exclude_expired` (boolean, optional): Whether to exclude expired records.
-- `page_size` (number, optional): The number of records per page.
-- `page` (number, optional): The page number to retrieve.
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
-**Returns:** `Promise<any>`
+**Returns:** `boolean`
 
 ---
 
-#### `get_blacklists`
-Fetches the list of all blacklists.
+#### `validate_auto_mod_solo_tank_config`
+No description provided.
 
-**Returns:** `Promise<any>`
-
----
-
-#### `temp_ban`
-Issues a temporary ban.
+**Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_name` (string, optional): The name of the player to ban.
-- `player_id` (string, optional): The ID of the player to ban.
-- `duration_hours` (number, optional): The duration of the ban in hours.
-- `reason` (string, optional): The reason for the ban.
-- `by` (string, optional): The name of the admin issuing the ban.
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
-**Returns:** `Promise<any>`
+**Returns:** `boolean`
 
 ---
 
-#### `perma_ban`
-Issues a permanent ban.
+#### `set_autobalance_enabled`
+No description provided.
+
+**Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_name` (string, optional): The name of the player to ban.
-- `player_id` (string, optional): The ID of the player to ban.
-- `reason` (string, optional): The reason for the ban.
-- `by` (string, optional): The name of the admin issuing the ban.
+- `value` (boolean) (default: null)
 
-**Returns:** `Promise<any>`
+**Returns:** `boolean`
 
 ---
 
-#### `remove_temp_ban`
-Removes a temporary ban by player ID.
+#### `set_autobalance_threshold`
+No description provided.
+
+**Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_id` (string, optional): The ID of the player to unban.
+- `max_diff` (integer) (default: null)
 
-**Returns:** `Promise<any>`
-
----
-
-#### `remove_perma_ban`
-Removes a permanent ban by player ID.
-
-**Parameters:**
-- `player_id` (string, optional): The ID of the player to unban.
-
-**Returns:** `Promise<any>`
+**Returns:** `boolean`
 
 ---
 
-#### `unban`
-Unbans a player by player ID.
+### Kicks, Bans & Blacklists
 
-**Parameters:**
-- `player_id` (string, optional): The ID of the player to unban.
+**Bans**:
+Bans are records stored on server config.
 
-**Returns:** `Promise<any>`
+**Blacklists**:
+Blacklists are collections of ban-like records stored by CRCON
+to provide greater flexibility and scalability.
+Recommend to use blacklists over bans when possible as they are more flexible and versatile.
 
----
+#### `describe_name_kick_config`
+No description provided.
 
-#### `unblacklist_player`
-Removes a player from the blacklist.
+**Supports HTTP methods:** GET
 
-**Parameters:**
-- `player_id` (string, optional): The ID of the player to remove from the blacklist.
+**No parameters required.**
 
-**Returns:** `Promise<any>`
-
----
-
-### **Player Management**
-
-#### `get_players`
-Fetches the list of all players.
-
-**Returns:** `Promise<any>`
+**Returns:** `object`
 
 ---
 
-#### `get_player_info`
-Fetches information about a specific player.
+#### `describe_votekick_autotoggle_config`
+No description provided.
 
-**Parameters:**
-- `player_name` (string, optional): The name of the player.
-- `can_fail` (boolean, optional): Indicates if the request can fail.
+**Supports HTTP methods:** GET
 
-**Returns:** `Promise<any>`
+**No parameters required.**
 
----
-
-#### `get_detailed_player_info`
-Fetches detailed information about a specific player.
-
-**Parameters:**
-- `player_name` (string, optional): The name of the player to fetch details for.
-
-**Returns:** `Promise<any>`
+**Returns:** `object`
 
 ---
 
-#### `get_detailed_players`
-Fetches detailed information about all players.
+#### `get_idle_autokick_time`
+No description provided.
 
-**Returns:** `Promise<any>`
+**Supports HTTP methods:** GET
 
----
+**No parameters required.**
 
-#### `get_player_profile`
-Fetches the profile of a specific player, including session details.
-
-**Parameters:**
-- `player_id` (string, optional): The ID of the player to fetch the profile for.
-- `num_sessions` (number, optional): The number of sessions to include in the profile.
-
-**Returns:** `Promise<any>`
+**Returns:** `integer`
 
 ---
 
-#### `get_playerids`
-Fetches player IDs with an optional dictionary format.
+#### `get_max_ping_autokick`
+No description provided.
 
-**Parameters:**
-- `as_dict` (boolean, optional): Whether to return the results as a dictionary.
+**Supports HTTP methods:** GET
 
-**Returns:** `Promise<any>`
+**No parameters required.**
 
----
-
-#### `get_players_history`
-Fetches the history of players based on filters.
-
-**Parameters:**
-- `page` (number, optional): The page number to retrieve.
-- `page_size` (number, optional): The number of records per page.
-- `last_seen_from` (string, optional): Start date/time for filtering by last seen.
-- `last_seen_till` (string, optional): End date/time for filtering by last seen.
-- `player_id` (string, optional): Filter by player ID.
-- `player_name` (string, optional): Filter by player name.
-- `blacklisted` (boolean, optional): Filter by blacklist status.
-- `is_watched` (boolean, optional): Filter by watchlist status.
-- `exact_name_match` (boolean, optional): Whether to match the player name exactly.
-- `ignore_accent` (boolean, optional): Whether to ignore accents in name matching.
-- `flags` (string, optional): Filter by player flags.
-- `country` (string, optional): Filter by player country.
-
-**Returns:** `Promise<any>`
+**Returns:** `integer`
 
 ---
 
-#### `get_temp_bans`
-Fetches the list of temporary bans.
+#### `get_name_kick_config`
+No description provided.
 
-**Returns:** `Promise<any>`
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
 
 ---
 
-#### `flag_player`
-Flags a player with a specific label.
+#### `get_votekick_autotoggle_config`
+No description provided.
 
-**Parameters:**
-- `player_id` (string, optional): The player ID to flag.
-- `flag` (string, optional): The flag to assign.
-- `player_name` (string, optional): The player name (optional if player_id is provided).
-- `comment` (string, optional): A comment related to the flagging.
+**Supports HTTP methods:** GET
 
-**Returns:** `Promise<any>`
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `get_votekick_enabled`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `boolean`
+
+---
+
+#### `get_votekick_thresholds`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `array`
 
 ---
 
 #### `kick`
-Kicks a player from the game.
+Kick selected player.
+
+**Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_name` (string, optional): The name of the player to kick.
-- `reason` (string, optional): The reason for the kick.
-- `by` (string, optional): The name of the admin issuing the kick.
-- `player_id` (string, optional): The ID of the player to kick.
+- `player_name` (any) (default: null)
+- `reason` (any) (default: null)
+- `by` (string, optional) (default: null)
+- `player_id` (string, optional) (default: null)
 
-**Returns:** `Promise<any>`
+**Returns:** `boolean`
 
 ---
 
-#### `message_player`
-Sends a message to a player.
+#### `reset_votekick_thresholds`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**No parameters required.**
+
+**Returns:** `boolean`
+
+---
+
+#### `set_idle_autokick_time`
+No description provided.
+
+**Supports HTTP methods:** POST
 
 **Parameters:**
-- `player_name` (string, optional): The name of the player to message.
-- `player_id` (string, optional): The ID of the player to message.
-- `message` (string, optional): The message content.
-- `by` (string, optional): The name of the admin sending the message.
-- `save_message` (boolean, optional): Whether to save the message.
+- `minutes` (integer | string) (default: null): Expects numeric value.
 
-**Returns:** `Promise<any>`
-
----
-
-#### `post_player_comment`
-Posts a comment for a player.
-
-**Parameters:**
-- `player_id` (string, optional): The ID of the player to comment on.
-- `comment` (string, optional): The content of the comment.
-- `by` (string, optional): The name of the admin posting the comment.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `punish`
-Punishes a player.
-
-**Parameters:**
-- `player_name` (string, optional): The name of the player to punish.
-- `reason` (string, optional): The reason for the punishment.
-- `by` (string, optional): The name of the admin issuing the punishment.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `switch_player_now`
-Immediately switches a player to another team.
-
-**Parameters:**
-- `player_name` (string, optional): The name of the player to switch.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `switch_player_on_death`
-Switches a player to another team upon their death.
-
-**Parameters:**
-- `player_name` (string, optional): The name of the player to switch.
-- `by` (string, optional): The name of the admin issuing the switch.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `watch_player`
-Adds a player to the watchlist.
-
-**Parameters:**
-- `player_id` (string, optional): The ID of the player to watch.
-- `reason` (string, optional): The reason for watching.
-- `by` (string, optional): The name of the admin issuing the watch.
-- `player_name` (string, optional): The name of the player to watch.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `unwatch_player`
-Removes a player from the watchlist.
-
-**Parameters:**
-- `player_id` (string, optional): The ID of the player to unwatch.
-
-**Returns:** `Promise<any>`
-
----
-
-### **VIP Management**
-
-#### `get_vip_ids`
-Fetches the list of VIP IDs.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `get_expired_vip_config`
-Fetches the configuration for expired VIPs.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `get_real_vip_config`
-Fetches the real VIP configuration.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `get_vip_slots_num`
-Fetches the number of VIP slots.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `get_vips_count`
-Fetches the total count of VIPs.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `add_vip`
-Adds a new VIP.
-
-**Parameters:**
-- `player_id` (string, optional): The player ID to be added as VIP.
-- `description` (string, optional): A description for the VIP.
-- `expiration` (string, optional): The expiration date for the VIP status.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `remove_vip`
-Removes a VIP by player ID.
-
-**Parameters:**
-- `player_id` (string, optional): The player ID of the VIP to be removed.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `upload_vips`
-Uploads VIP configurations to the server.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `upload_vips_result`
-Fetches the result of the VIP upload.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `download_vips`
-Downloads VIP configurations from the server.
-
-**Returns:** `Promise<any>`
-
----
-
-### **Server Settings and Status**
-
-#### `get_server_settings`
-Fetches the server settings.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `get_connection_info`
-Fetches the connection information of the server.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `get_version`
-Fetches the current version of the server or API.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `get_status`
-Fetches the current status of the server.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `get_current_map_sequence`
-Fetches the current map sequence.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `get_camera_notification_config`
-Fetches the camera notification configuration.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `set_server_name`
-Sets the server name.
-
-**Parameters:**
-- `name` (string, optional): The new name of the server.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `set_map`
-Sets the current map to the specified map name.
-
-**Parameters:**
-- `map_name` (string, optional): The name of the map to set.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `set_map_shuffle_enabled`
-Enables or disables map shuffle.
-
-**Parameters:**
-- `enabled` (boolean, optional): The status of map shuffle.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `set_team_switch_cooldown`
-Sets the cooldown time for team switches.
-
-**Parameters:**
-- `minutes` (number, optional): The cooldown time in minutes.
-
-**Returns:** `Promise<any>`
+**Returns:** `boolean`
 
 ---
 
 #### `set_max_ping_autokick`
-Sets the maximum ping threshold for autokick.
+No description provided.
+
+**Supports HTTP methods:** POST
 
 **Parameters:**
-- `max_ms` (number, optional): The maximum ping in milliseconds.
+- `max_ms` (integer | string) (default: null): Expects numeric value.
 
-**Returns:** `Promise<any>`
+**Returns:** `boolean`
+
+---
+
+#### `set_name_kick_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string) (default: null)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
 
 ---
 
 #### `set_votekick_autotoggle_config`
-Sets the vote kick auto toggle configuration.
+No description provided.
+
+**Supports HTTP methods:** POST
 
 **Parameters:**
-- `by` (string, optional): User initiating the request.
-- `config` (object, optional): Configuration to apply.
-- `reset_to_default` (boolean, optional): If true, resets to default.
-- `kwargs` (object, optional): Additional arguments.
+- `by` (string) (default: null)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
-**Returns:** `Promise<any>`
+**Returns:** `boolean`
 
 ---
 
-#### `clear_cache`
-Clears the server cache.
+#### `set_votekick_enabled`
+No description provided.
 
-**Returns:** `Promise<any>`
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `value` (boolean) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `set_votekick_thresholds`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `threshold_pairs` (any) (default: null)
+
+**Returns:** `string | boolean`
+
+---
+
+#### `validate_name_kick_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string) (default: null)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `validate_votekick_autotoggle_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string) (default: null)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `describe_tk_ban_on_connect_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `describe_vac_game_bans_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `get_ban`
+get all bans from player_id
+@param player_id: steam_id_64 or windows store ID of a user
+@return: a array of bans
+
+**Supports HTTP methods:** GET
+
+**Parameters:**
+- `player_id` (string | integer) (default: null): Expects numeric value.
+
+**Returns:** `Array<object>`
+
+---
+
+#### `get_bans`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `Array<object>`
+
+---
+
+#### `get_perma_bans`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `Array<object>`
+
+---
+
+#### `get_temp_bans`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `Array<object>`
+
+---
+
+#### `get_tk_ban_on_connect_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `get_vac_game_bans_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `perma_ban`
+Permanently ban a player by player name or player ID.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `player_name` (any, optional) (default: null)
+- `player_id` (any, optional) (default: null)
+- `reason` (any, optional) (default: "")
+- `by` (any, optional) (default: "")
+
+**Returns:** `boolean`
+
+---
+
+#### `remove_perma_ban`
+Remove a perma ban by ban log. Note that a player ID is a valid ban log.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `player_id` (string) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `remove_temp_ban`
+Remove a temp ban by player ID or game server ban log.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `player_id` (string) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `set_tk_ban_on_connect_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string) (default: null)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `set_vac_game_bans_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string) (default: null)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `temp_ban`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `player_name` (string, optional) (default: null)
+- `player_id` (string, optional) (default: null)
+- `duration_hours` (integer, optional) (default: 2)
+- `reason` (string, optional) (default: null)
+- `by` (string, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `unban`
+Remove all temporary and permanent bans from the player_id.
+
+This does not remove any blacklists, meaning the player may be immediately banned
+again. To remove any bans or blacklists, use `unblacklist_player` instead.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `player_id` (string) (default: null): steam_id_64 or windows store ID
+
+**Returns:** `boolean`
+
+---
+
+#### `validate_tk_ban_on_connect_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `validate_vac_game_bans_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `add_blacklist_record`
+Adds a new record to a blacklist.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `player_id` (string) (default: null): steam_id_64 or windows store ID to blacklist.
+- `blacklist_id` (integer) (default: null): The ID of the blacklist to use.
+- `reason` (string) (default: null): The reason the player was blacklisted for.
+- `expires_at` (any, optional) (default: null): When the blacklist should expire, if ever.
+- `admin_name` (string, optional) (default: <API Key User>): The person/tool that is blacklisting the player.
+
+**Returns:** `object` of record details.
+
+---
+
+#### `create_blacklist`
+Creates a new, empty blacklist.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `name` (string) (default: null): Name for the list
+- `sync` (string, optional) (default: "KICK_ONLY"): Method to use for synchronizing an active record with the game server.
+- `servers` (Array<integer | string>, optional) (default: null): A sequence of server numbers which this blacklist will apply to. `None` means all servers.
+
+**Returns:** `object` of blacklist details.
+
+---
+
+#### `delete_blacklist`
+Removes a blacklist alongside all of its records.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `blacklist_id` (integer) (default: null): The ID of the blacklist to delete.
+
+**Returns:** `boolean`
+
+---
+
+#### `delete_blacklist_record`
+Removes a blacklist record.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `record_id` (integer) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `edit_blacklist`
+Edits a blacklist.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `blacklist_id` (integer) (default: null): The ID of the blacklist to edit.
+- `name` (string) (default: null): The name of the blacklist.
+- `sync_method` (any) (default: null): The method to use for synchronizing records with the game server.
+- `servers` (any) (default: null): A sequence of server numbers which this blacklist will apply to. `None` means all servers.
+
+**Returns:** `None`
+
+---
+
+#### `edit_blacklist_record`
+Edits a blacklist record.
+
+The blacklisted player ID cannot be edited. You instead need to
+delete this record and create a new one.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `record_id` (integer) (default: null): The ID of the record to edit.
+- `blacklist_id` (integer, optional) (default: null): The ID of the blacklist this record should be part of.
+- `reason` (string, optional) (default: null): The reason the player was blacklisted for.
+- `expires_at` (any, optional) (default: null): When the blacklist should expire, if ever.
+
+**Returns:** `boolean`
+
+---
+
+#### `get_blacklist`
+Get a blacklist and its respective records.
+
+**Supports HTTP methods:** GET
+
+**Parameters:**
+- `blacklist_id` (integer) (default: null): The ID of the blacklist to get.
+
+**Returns:** `object`
+
+**Return Example:**
+```json
+{
+    id: 0,
+    name: 'Default',
+    sync: 'kick_only',
+    servers: null
+    records: [
+        {
+        id: 1,
+        player_id: '123123123123123',
+        reason: 'Toxic language',
+        admin_name: 'Cool Guy',
+        created_at: '2024-08-23T16:10:17.260715+00:00',
+        expires_at: null,
+        is_active: true
+        }
+    ]
+}
+```
+
+---
+
+#### `get_blacklist_records`
+Get all blacklist records.
+
+**Supports HTTP methods:** GET
+
+**Parameters:**
+- `player_id` (string) (default: null)
+- `reason` (string) (default: null)
+- `blacklist_id` (integer) (default: null)
+- `exclude_expired` (boolean) (default: False)
+- `page_size` (integer) (default: 50)
+- `page` (integer) (default: 1)
+
+**Returns:** `object` with the following properties:
+- `records`: array<object>
+
+---
+
+#### `get_blacklists`
+Get all blacklists.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `Array<object>`
+
+---
+
+#### `unblacklist_player`
+Expires all blacklists of a player and unbans them from all servers.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `player_id` (string) (default: null): steam_id_64 or windows store ID
+
+**Returns:** `boolean`
+
+---
+
+### Player Management
+
+**Flags:**
+Flags are used to label users and some tools use the flags to whitelist
+users. They are traditionally an emoji (the frontend uses an emoji picker)
+but there is no length restriction in the database.
+
+#### `flag_player`
+Adds a new flag to the specified player_id
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `player_id` (string) (default: null): steam_id_64 or windows store ID.
+- `flag` (string) (default: null): The flag to add.
+- `player_name` (string, optional) (default: null): The players name which will be added as an alias.
+- `comment` (string, optional) (default: null)
+
+**Returns:** `object` with flag parameters.
+
+---
+
+#### `get_detailed_player_info`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**Parameters:**
+- `player_name` (string) (default: null)
+- `player` (any) (default: null)
+
+**Returns:** `object`
+
+---
+
+#### `get_detailed_players`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object` with the following properties:
+- `players`: `object`
+- `fail_count`: `integer`
+
+---
+
+#### `get_player_comments`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**Parameters:**
+- `player_id` (string) (default: null)
+
+**Returns:** `Array<object>`
+
+---
+
+#### `get_player_info`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**Parameters:**
+- `player_name` (string) (default: null)
+- `can_fail` (any, optional) (default: False)
+
+**Returns:** `object`
+
+---
+
+#### `get_player_messages`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**Parameters:**
+- `player_id` (string) (default: null)
+
+**Returns:** `Array<object>`
+
+---
+
+#### `get_player_profile`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**Parameters:**
+- `player_id` (string) (default: null)
+- `num_sessions` (integer, optional) (default: 10)
+
+**Returns:** `object` with the following properties:
+- `id`: `integer`,
+- `player_id`: `string`,
+- `created`: `string`,
+- `names`: `array`,
+- `sessions`: `array`,
+- `sessions_count`: `integer`,
+- `total_playtime_seconds`: `integer`,
+- `current_playtime_seconds`: `integer`,
+- `received_actions`: `array`,
+- `penalty_count`: `object`,
+- `blacklists`: `array`,
+- `is_blacklisted`: `boolean`,
+- `flags`: `array`,
+- `watchlist`: `null | array`,
+- `steaminfo`: `object`,
+- `vips`: `array`,
+- `bans`: `array`,
+- `comments`: `array`
+
+---
+
+#### `get_playerids`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**Parameters:**
+- `as_dict` (boolean, optional) (default: False)
+
+**Returns:** `{ [key: string]: string } | Array<[string, string]>`
+
+---
+
+#### `get_players`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `Array<object>`
+
+---
+
+#### `get_players_history`
+No description provided.
+
+**Supports HTTP methods:** GET, POST
+
+**Parameters:**
+- `page` (integer, optional) (default: 1)
+- `page_size` (integer, optional) (default: 500)
+- `last_seen_from` (string, optional) (default: null)
+- `last_seen_till` (string, optional) (default: null)
+- `player_id` (string, optional) (default: null)
+- `player_name` (string, optional) (default: null)
+- `blacklisted` (boolean, optional) (default: null)
+- `is_watched` (boolean, optional) (default: null)
+- `exact_name_match` (boolean, optional) (default: False)
+- `ignore_accent` (boolean, optional) (default: True)
+- `flags` (string | Array<string>, optional) (default: null)
+- `country` (string, optional) (default: null)
+
+**Returns:** `object` with the following properties:
+- `total`: `integer`,
+- `players`: `Array<object>`,
+- `page`: `integer`,
+- `page_size`: `integer`
+
+---
+
+#### `post_player_comment`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `player_id` (string) (default: null)
+- `comment` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
+
+**Returns:** `None`
+
+---
+
+#### `punish`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `player_name` (string) (default: null)
+- `reason` (string) (default: null)
+- `by` (string, optional) (default: <API Key User>)
+
+**Returns:** `boolean`
+
+---
+
+#### `switch_player_now`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `player_name` (string) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `switch_player_on_death`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `player_name` (any) (default: null)
+- `by` (any, optional) (default: <API Key User>)
+
+**Returns:** `boolean`
+
+---
+
+#### `unflag_player`
+Flags can be removed either by flag_id (database key) or by passing a player ID and flag
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `flag_id` (integer, optional) (default: null): The database primary key of the flag record to delete.
+- `player_id` (string, optional) (default: null): steam_id_64 or windows store ID.
+- `flag` (string, optional) (default: null): The flag to remove from player if present
+
+**Returns:** `object` with flag parameters.
+
+---
+
+#### `unwatch_player`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `player_id` (integer | string) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `watch_player`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `player_id` (string) (default: null)
+- `reason` (string) (default: null)
+- `by` (string) (default: null)
+- `player_name` (string, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+### Messaging
+
+#### `message_player`
+Send ingame admin message to a player.
+
+Requires `player_id` or `player_name`.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `player_name` (any) (default: null)
+- `player_id` (any) (default: null)
+- `message` (string) (default: null)
+- `by` (string) (default: <API Key User>)
+- `save_message` (boolean) (default: False)
+
+**Returns:** `string`
+
+---
+
+#### `add_message_template`
+Add a new message template and return the ID of the new record
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `title` (string) (default: null)
+- `content` (string) (default: null)
+- `category` (any) (default: null)
+- `by` (string) (default: null)
+
+**Returns:** `integer`
+
+---
+
+#### `delete_message_template`
+Delete a specific message template
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `id` (integer) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `describe_standard_broadcast_messages`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `describe_standard_punishments_messages`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `describe_standard_welcome_messages`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `edit_message_template`
+Add a new message template and return the ID of the new record
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `id` (integer) (default: null)
+- `title` (string, optional) (default: null)
+- `content` (string, optional) (default: null)
+- `category` (string | rcon.types.MessageTemplateCategory) (default: null)
+- `by` (string) (default: <API Key User>)
+
+**Returns:** `null`
+
+---
+
+#### `get_all_message_templates`
+Get all message templates by category
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+**Return Example:**
+
+```json
+{
+    "BROADCAST": [],
+    "MESSAGE": [],
+    "REASON": [],
+    "WELCOME": []
+}
+```
+
+---
+
+#### `get_all_standard_message_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+**Return Example:**
+
+```json
+{
+    "StandardWelcomeMessagesUserConfig": {
+        "messages": []
+    },
+    "StandardBroadcastMessagesUserConfig": {
+        "messages": []
+    },
+    "StandardPunishmentMessagesUserConfig": {
+        "messages": []
+    }
+},
+```
+
+---
+
+#### `get_broadcast_message`
+Returns the current broadcast message if the cache is set.
+
+There is no RCON command to get the current broadcast message so it can only
+be retrieved if it was set by CRCON and the cache has not expired.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `str | bytes | None`
+
+---
+
+#### `get_message_template`
+Return the message template for the specified record if it exists.
+
+**Supports HTTP methods:** GET
+
+**Parameters:**
+- `id` (integer) (default: null)
+
+**Returns:** `object | null`
+
+---
+
+#### `get_message_template_categories`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `Array<string>`
+
+---
+
+#### `get_message_templates`
+Get all possible message type categories
+
+**Supports HTTP methods:** GET
+
+**Parameters:**
+- `category` (any) (default: null)
+
+**Returns:** `array`
+
+---
+
+#### `get_standard_broadcast_messages`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object` with the following properties:
+- `messages`: `Array<object>`
+
+---
+
+#### `get_standard_punishments_messages`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object` with the following properties:
+- `messages`: `Array<object>`
+
+---
+
+#### `get_standard_welcome_messages`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object` with the following properties:
+- `messages`: `Array<object>`
+
+---
+
+#### `get_welcome_message`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `string | null`
+
+---
+
+#### `set_broadcast`
+Set the in game broadcast message and return the previous message if set.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `message` (string) (default: null)
+
+**Returns:** `string`
+
+---
+
+#### `set_standard_broadcast_messages`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: false)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `set_standard_punishments_messages`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean) (default: false)
+- `kwargs` (any) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `set_standard_welcome_messages`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean) (default: false)
+- `kwargs` (any) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `set_welcome_message`
+Set the in game welcome (rules) message and return the previous message if set.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `message` (string) (default: null)
+
+**Returns:** `string`
+
+---
+
+#### `validate_standard_broadcast_messages`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean) (default: false)
+- `kwargs` (any) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `validate_standard_punishments_messages`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean) (default: false)
+- `kwargs` (any) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `validate_standard_welcome_messages`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean) (default: false)
+- `kwargs` (any) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+### VIP Management
+
+#### `add_vip`
+Adds VIP status on the game server and adds or updates their PlayerVIP record.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `player_id` (string) (default: null)
+- `description` (string) (default: null)
+- `expiration` (string, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `describe_expired_vip_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `describe_real_vip_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `describe_seed_vip_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `download_vips`
+Not supported by this interface.
+
+---
+
+#### `get_expired_vip_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `get_real_vip_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `get_seed_vip_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `get_vip_ids`
+Get a list of all VIPs.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `Array<object>`
+
+---
+
+#### `get_vip_slots_num`
+Get number of VIP slots.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `integer`
+
+---
+
+#### `get_vips_count`
+Get number of VIPs ingame.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `integer`
+
+---
+
+#### `remove_all_vips`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**No parameters required.**
+
+**Returns:** `boolean`
+
+---
+
+#### `remove_vip`
+Removes VIP status on the game server and removes their PlayerVIP record.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `player_id` (any) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `set_expired_vip_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `set_real_vip_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `set_seed_vip_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `set_vip_slots_num`
+Set number of VIP slots.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `value` (integer) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `upload_vips`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**No parameters required.**
+
+**Returns:** `None`
+
+---
+
+#### `upload_vips_result`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `None`
+
+---
+
+#### `validate_expired_vip_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `validate_real_vip_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `validate_seed_vip_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+### Map Management
+
+#### `add_map_to_rotation`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `map_name` (string) (default: null)
+- `after_map_name` (string, optional) (default: null)
+- `after_map_name_number` (integer, optional) (default: null)
+
+**Returns:** `string`
+
+---
+
+#### `add_map_to_votemap_whitelist`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `map_name` (string) (default: null)
+
+**Returns:** `None`
+
+---
+
+#### `add_maps_to_rotation`
+Add the given maps to the rotation, returns the game server response for each map
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `map_names` (Array<string>) (default: null)
+
+**Returns:** `Array<[string, string]>`
+
+---
+
+#### `add_maps_to_votemap_whitelist`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `map_names` (Array<string>) (default: null)
+
+**Returns:** `Array<[string, string]>`
+
+---
+
+#### `describe_votemap_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `get_current_map_sequence`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `Array<string>`
+
+---
+
+#### `get_map`
+Get current map.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+**Return Example:**
+
+```json
+{
+    "id": "stmariedumont_warfare",
+    "map": {
+        "id": "stmariedumont",
+        "name": "ST MARIE DU MONT",
+        "tag": "BRC",
+        "pretty_name": "St. Marie Du Mont",
+        "shortname": "SMDM",
+        "allies": {
+            "name": "us",
+            "team": "allies"
+        },
+        "axis": {
+            "name": "ger",
+            "team": "axis"
+        },
+        "orientation": "vertical"
+    },
+    "game_mode": "warfare",
+    "attackers": null,
+    "environment": "day",
+    "pretty_name": "St. Marie Du Mont Warfare",
+    "image_name": "stmariedumont-day.webp"
+},
+```
+
+---
+
+#### `get_map_history`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `Array<object>`
+
+---
+
+#### `get_map_rotation`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `Array<object>`
+
+---
+
+#### `get_map_scoreboard`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**Parameters**
+- `map_id` (integer) (default: null)
+
+**Returns:** `None`
+
+---
+
+#### `get_map_shuffle_enabled`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `boolean`
+
+---
+
+#### `get_maps`
+Get a list of all maps.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `Array<object>`
+
+---
+
+#### `get_next_map`
+Return the next map in the rotation as determined by the gameserver through the gamestate command
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `get_previous_map`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `get_votemap_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `get_votemap_status`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `Array<object>`
+
+---
+
+#### `get_votemap_whitelist`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `Array<string>`
+
+---
+
+#### `remove_map_from_rotation`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `map_name` (string) (default: null)
+- `map_number` (integer, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `remove_map_from_votemap_whitelist`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `map_name` (string) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `remove_maps_from_rotation`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `map_names` (Array<string>) (default: null)
+
+**Returns:** `string`
+
+---
+
+#### `remove_maps_from_votemap_whitelist`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `map_names` (any) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `reset_map_votemap_whitelist`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**No parameters required.**
+
+**Returns:** `boolean`
+
+---
+
+#### `reset_votemap_state`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**No parameters required.**
+
+**Returns:** `array`
+
+---
+
+#### `set_map`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `map_name` (string) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `set_map_shuffle_enabled`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `enabled` (boolean) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `set_maprotation`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `map_names` (any) (default: null)
+
+**Returns:** `Array<object>`
+
+---
+
+#### `set_votemap_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `set_votemap_whitelist`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `map_names` (any) (default: null)
+
+**Returns:** `None`
+
+---
+
+#### `validate_votemap_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string) (default: null)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+### Server Settings & Status
+
+#### `clear_cache`
+Clear every key in this servers Redis cache.
+
+Many things in CRCON are cached in Redis to avoid excessively polling
+the game server, this clears the entire cache which is sometimes necessary
+to force a refresh
+
+**Supports HTTP methods:** POST
+
+**No parameters required.**
+
+**Returns:** number of deleted keys.
+
+---
+
+#### `describe_rcon_connection_settings_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `describe_rcon_server_settings_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `describe_server_name_change_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `describe_steam_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `get_connection_info`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `get_server_list`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `array`
+
+---
+
+#### `get_services`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `Array<object>`
+
+---
+
+#### `do_service`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**No parameters required.**
+
+**Returns:** UNKNOWN
+
+---
+
+#### `get_steam_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `get_version`
+Get CRCON version.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `string`
+
+---
+
+#### `is_logged_in`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `login`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**No parameters required.**
+
+**Returns:** UNKNOWN
+
+---
+
+#### `logout`
+No description provided.
+
+**Supports HTTP methods:** GET, POST
+
+**No parameters required.**
+
+**Returns:** UNKNOWN
+
+---
+
+#### `describe_admin_pings_discord_webhooks_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `describe_audit_discord_webhooks_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `describe_camera_discord_webhooks_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `describe_camera_notification_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `describe_chat_commands_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `describe_chat_discord_webhooks_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `describe_kills_discord_webhooks_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `describe_rcon_chat_commands_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `describe_scorebot_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `describe_watchlist_discord_webhooks_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `get_admin_pings_discord_webhooks_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `get_all_discord_webhooks_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `get_audit_discord_webhooks_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `get_camera_discord_webhooks_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `get_camera_notification_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `get_chat_commands_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `get_chat_discord_webhooks_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `get_kills_discord_webhooks_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `get_rcon_connection_settings_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `get_rcon_server_settings_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `get_rcon_chat_commands_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `get_scorebot_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `get_watchlist_discord_webhooks_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `set_admin_pings_discord_webhooks_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `set_audit_discord_webhooks_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `set_camera_discord_webhooks_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `set_camera_notification_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `set_chat_commands_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `set_chat_discord_webhooks_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
 
 ---
 
 #### `reconnect_gameserver`
-Reconnects the game server.
+Restart gunicorn workers which reconnects Rcon endpoint instances
 
-**Returns:** `Promise<any>`
+**Supports HTTP methods:** POST
 
----
+**No parameters required.**
 
-#### `run_raw_command`
-Executes a raw command on the server.
-
-**Returns:** `Promise<any>`
+**Returns:** `None`
 
 ---
 
-### **Game Settings and Status**
+#### `set_kills_discord_webhooks_config`
+No description provided.
 
-#### `get_gamestate`
-Fetches the current game state.
-
-**Returns:** `Promise<any>`
-
----
-
-#### `get_date_scoreboard`
-Fetches the scoreboard data for a specified date range.
+**Supports HTTP methods:** POST
 
 **Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
 
-- `start` (string, optional): The start date of the range.
-- `end` (string, optional): The end date of the range.
+**Returns:** `boolean`
 
-**Returns:** `Promise<any>`
+---
+
+#### `set_rcon_chat_commands_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `set_rcon_connection_settings_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `set_rcon_server_settings_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `set_scorebot_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `set_server_name`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `name` (string) (default: null)
+
+**Returns:** `None`
+
+---
+
+#### `set_server_name_change_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `set_watchlist_discord_webhooks_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `validate_admin_pings_discord_webhooks_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+#### `validate_audit_discord_webhooks_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `validate_camera_discord_webhooks_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+#### `validate_camera_notification_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+#### `validate_chat_commands_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+#### `validate_chat_discord_webhooks_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `validate_kills_discord_webhooks_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+
+#### `validate_rcon_chat_commands_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+#### `validate_rcon_connection_settings_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+#### `validate_rcon_server_settings_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `validate_scorebot_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `validate_server_name_change_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `validate_steam_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `validate_watchlist_discord_webhooks_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `set_steam_config`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `by` (string, optional) (default: <API Key User>)
+- `config` (object) (default: null)
+- `reset_to_default` (boolean, optional) (default: False)
+- `kwargs` (any, optional) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `get_server_name_change_config`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `get_server_settings`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+### Game Settings & Status
+
+#### `get_name`
+Get server name.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `string`
+
+---
+
+#### `get_public_info`
+Get public game info.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `get_status`
+Get game status.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `ban_profanities`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `profanities` (Array<string>) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `unban_profanities`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `profanities` (any) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `set_profanities`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `profanities` (Array<string>) (default: null)
+
+**Returns:** `Array<string>`
+
+---
+
+
+
+#### `get_profanities`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `Array<string>`
+
+---
+
+#### `get_autobalance_enabled`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `boolean`
+
+---
+
+#### `get_autobalance_threshold`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `integer`
+
+---
+
+#### `get_gamestate`
+Returns player counts, team scores, remaining match time and current/next map
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
 
 ---
 
 #### `get_live_game_stats`
-Fetches live game statistics.
+Return stats for the currently playing match
 
-**Returns:** `Promise<any>`
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object` with the following properties:
+- `snapshot_timestamp`: `float`
+- `stats`: `Array<object>`
 
 ---
 
-#### `get_queue_length`
-Fetches the current queue length.
+#### `get_live_scoreboard`
+Return stats for all currently connected players (stats are reset on disconnect, not match start)
 
-**Returns:** `Promise<any>`
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object` with the following properties:
+- `snapshot_timestamp`: `float`
+- `refresh_interval_sec`: `integer`
+- `stats`: `Array<object>`
+
+---
+
+#### `get_date_scoreboard`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**Parameters:**
+- `start` (string) (default: null)
+- `end` (string) (default: null)
+
+**Returns:** `object`
+
+---
+
+#### `run_raw_command`
+No description provided.
+
+**Supports HTTP methods:** GET, POST
+
+**No parameters required.**
+
+**Returns:** `None`
 
 ---
 
 #### `get_round_time_remaining`
-Fetches the remaining time for the current round in seconds.
+Returns the amount of time left in the round as seconds
 
-**Returns:** `Promise<any>`
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `integer`
+
+---
+
+#### `get_scoreboard_maps`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**Parameters:**
+- `page` (integer) (default: 1)
+
+**Returns:** `object`
+
+---
+
+#### `get_objective_row`
+Get specific objective row for current map. (Array starts at zero)
+
+**Supports HTTP methods:** GET
+
+**Parameters:**
+- `row` (integer) (default: null)
+
+**Returns:** `Array<string>`
+
+---
+
+#### `get_objective_rows`
+Get all objective rows for current map.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `Array<array>`
+
+---
+
+#### `get_own_user_permissions`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `get_queue_length`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `integer`
+
+---
+
+#### `get_slots`
+Return the current number of connected players and max players allowed
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object` with the following properties:
+- `current_players`: `integer`
+- `max_players`: `integer`
 
 ---
 
 #### `get_team_objective_scores`
-Fetches team objective scores.
+Returns the number of objectives held by the allied/axis team respectively
 
-**Returns:** `Promise<any>`
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `Array<integer, integer>`
+
+---
+
+#### `get_team_switch_cooldown`
+No description provided.
+
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `integer`
 
 ---
 
 #### `get_team_view`
-Fetches the team view.
+No description provided.
 
-**Returns:** `Promise<any>`
+**Supports HTTP methods:** GET
+
+**No parameters required.**
+
+**Returns:** `object`
+
+---
+
+#### `set_game_layout`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `objectives` (Array<string>) (default: null)
+- `random_constraints` (integer, optional) (default: 0)
+
+**Returns:** `None`
+
+---
+
+#### `set_queue_length`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `value` (integer) (default: null)
+
+**Returns:** `boolean`
+
+---
+
+#### `set_team_switch_cooldown`
+No description provided.
+
+**Supports HTTP methods:** POST
+
+**Parameters:**
+- `minutes` (integer) (default: null)
+
+**Returns:** `boolean`
 
 ---
