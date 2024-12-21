@@ -391,7 +391,7 @@ No description provided.
 
 ---
 
-### **Auto Moderation**
+### Auto Moderation
 
 #### `describe_auto_broadcasts_config`
 No description provided.
@@ -699,7 +699,7 @@ No description provided.
 
 ---
 
-### **Kicks, Bans & Blacklists**
+### Kicks, Bans & Blacklists
 
 **Bans**:
 Bans are records stored on server config.
@@ -1313,7 +1313,7 @@ Expires all blacklists of a player and unbans them from all servers.
 
 ---
 
-### **Player Management**
+### Player Management
 
 **Flags:**
 Flags are used to label users and some tools use the flags to whitelist
@@ -1573,7 +1573,7 @@ No description provided.
 
 ---
 
-### **Messaging**
+### Messaging
 
 #### `message_player`
 Send ingame admin message to a player.
@@ -1928,7 +1928,7 @@ No description provided.
 
 ---
 
-### **VIP Management**
+### VIP Management
 
 #### `add_vip`
 Adds VIP status on the game server and adds or updates their PlayerVIP record.
@@ -2195,7 +2195,7 @@ No description provided.
 
 ---
 
-### **Map Management**
+### Map Management
 
 #### `add_map_to_rotation`
 No description provided.
@@ -2569,7 +2569,7 @@ No description provided.
 
 ---
 
-### **Server Settings & Status**
+### Server Settings & Status
 
 #### `clear_cache`
 Clear every key in this servers Redis cache.
@@ -3442,7 +3442,7 @@ No description provided.
 
 ---
 
-### **Game Settings & Status**
+### Game Settings & Status
 
 #### `get_name`
 Get server name.
